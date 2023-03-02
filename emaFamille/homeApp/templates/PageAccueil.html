@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center">
+    <img src="{% static 'Logo_EMAFamille.PNG' %}" width="512">
+    <br>
+    <h1 class="titreProfile">Bienvenue</h1>
+    <p> Parce que la famille, c'est la Famille</p>
+
+    <div class="container">
+        <div class="row g-4 py-5 row-cols-3 row-cols-lg-6" >
+    <div class="col d-grip gap-2 align-items-start">
+    </div>
+            <div class="col d-grip gap-2 align-items-start">
+            </div>
+    <div class="col d-grip gap-2 align-items-start">
+        <div>
+            <a href="PageConnexion.html" class="btn btn-primary boutons"  >
+                Me connecter
+            </a>
+        </div>
+    </div>
+
+    <div class="col d-grip gap-2 align-items-start">
+        <div>
+            <a href="PageInscription.html" class="btn btn-primary boutons"  >
+                M'inscrire
+            </a>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div>
+        <a href="PagePresentation.html" class="btn btn-primary boutons" >
+            En savoir plus sur EMA Famille
+        </a>
+    </div>
+    <br>
+    <br>
+
+
+</div>
+
+{% endblock %}
+
+{% block css %}
