@@ -67,4 +67,12 @@ def edit_profile(request):
         profile = Profile.objects.get(user=request.user)
         return render(request, 'PageModification.html', {'user': request.user,'profile': profile})
     else:
-        return redirect('login')    
+        return redirect('login')
+
+def presentation(request):
+    return render(request,'PagePresentation.html')
+def inscription(request):
+    return render(request, 'PageInscription.html')
+
+def connexion(request):
+    return render(request, 'PageConnexion.html')
