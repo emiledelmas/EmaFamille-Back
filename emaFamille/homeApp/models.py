@@ -2,13 +2,26 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-# Create your models here.
+
+
+class Famille(models.Model):
+    nom=models.CharField(max_length=50)
+    logo=models.ImageField(upload_to='media/pp', null=True, blank=True)
+    description=models.TextField()
+    drive=models.CharField(max_length=100)
+    chef=models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    GPA=models.FloatField(null=True, blank=True)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='media/pp', null=True, blank=True)
     promo = models.IntegerField()
+    famille=models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='Profile', blank=True,null=True)
     def __str__(self):
         return self.user.username
+
+
 
 class Post_Feed(models.Model):
     auteur = models.ForeignKey(User, on_delete=models.DO_NOTHING)
