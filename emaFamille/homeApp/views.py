@@ -77,3 +77,7 @@ def inscription(request):
 
 def connexion(request):
     return render(request, 'PageConnexion.html')
+
+def forum(request):
+    return render(request, 'PageForum.html')
+
