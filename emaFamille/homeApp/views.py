@@ -1,19 +1,27 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from .models import Profile
+from django.shortcuts import redirect
+from django.shortcuts import render
+
+from .models import Profile, Post_Feed
+
+
 # Import forms
 from .forms import LoginForm, RegisterForm
-
-
 # Create your views here.
 def home(request):
-    if request.user.is_authenticated:
-        return render(request, 'feed.html', {'user': request.user})
+    if request.method == "POST":
+        texte = request.POST.get("texte")
+        image = request.POST.get("image")
+        post_feed = Post_Feed(auteur=request.user,texte=texte,image=image)
+        post_feed.save()
+        return redirect('home')
     else:
-        return render(request, 'pageAccueil.html')
-
+        if request.user.is_authenticated:
+            posts_feed = Post_Feed.objects.all().order_by("-date")
+            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed})
+        else:
+            return render(request, 'pageAccueil.html')
 
 def login_user(request):
     if request.method == 'POST':
@@ -29,11 +37,9 @@ def login_user(request):
             return render(request, 'PageConnexion.html', {'error': 'Username or password is incorrect'})
     return render(request, 'PageConnexion.html')
 
-
 def logout_user(request):
     logout(request)
     return redirect('login')
-
 
 def register_user(request):
     if request.method == 'POST':
@@ -47,9 +53,8 @@ def register_user(request):
             prenom = registerForm.cleaned_data['prenom']
             if User.objects.filter(username=username).exists():
                 return render(request, 'PageInscription.html', {'error': 'Username already exists'})
-            else:
-                user = User.objects.create_user(username=username, password=password, email=email, last_name=nom,
-                                                first_name=prenom)
+            else:   
+                user = User.objects.create_user(username=username, password=password, email=email,last_name=nom, first_name=prenom)
                 user.save()
                 profile = Profile(user=user, promo=promo)
                 profile.save()
@@ -58,31 +63,29 @@ def register_user(request):
         return redirect('login')
     else:
         return render(request, 'PageInscription.html')
-
+    
 
 def profile(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        return render(request, 'PageProfile.html', {'user': request.user, 'profile': profile})
+        return render(request, 'PageProfile.html', {'user': request.user,'profile': profile})
     else:
         return redirect('login')
 
+    
 
 def edit_profile(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        return render(request, 'PageModification.html', {'user': request.user, 'profile': profile})
+        return render(request, 'PageModification.html', {'user': request.user,'profile': profile})
     else:
         return redirect('login')
 
-
 def presentation(request):
-    return render(request, 'PagePresentation.html')
-
+    return render(request,'PagePresentation.html')
 
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-
-def forum(request):
-    return render(request, 'PageForum.html')
+def connexion(request):
+    return render(request, 'PageConnexion.html')

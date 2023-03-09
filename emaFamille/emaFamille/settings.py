@@ -24,12 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, ".env")
+dotenv_file = os.path.join(BASE_DIR, "../.env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
 # UPDATE secret key
-SECRET_KEY = os.environ['SECRET_KEY'] # Instead of your actual secret ke
+#SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = ")(1%n)cizke#2%j34v42v$kx1p9rvc82v**^d)z4-1b6!qjuw+"
+
+# Instead of your actual secret ke
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'homeApp'
 ]
 
