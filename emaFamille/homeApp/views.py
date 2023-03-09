@@ -19,7 +19,8 @@ def home(request):
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
-            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed})
+            profile = Profile.objects.get(user=request.user)
+            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile})
         else:
             return render(request, 'pageAccueil.html')
 

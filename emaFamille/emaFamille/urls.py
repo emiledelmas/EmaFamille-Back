@@ -29,7 +29,6 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('presentation', views.presentation, name='presentation'),
     path('inscription', views.inscription, name='inscription'),
-    path('forum', views.forum, name='forum')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
