@@ -71,6 +71,7 @@ def edit_profile(request):
 
 def presentation(request):
     return render(request,'PagePresentation.html')
+
 def inscription(request):
     return render(request, 'PageInscription.html')
 
