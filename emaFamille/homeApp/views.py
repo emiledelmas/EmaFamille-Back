@@ -5,12 +5,15 @@ from django.contrib.auth.models import User
 from .models import Profile
 # Import forms
 from .forms import LoginForm, RegisterForm
+
+
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
         return render(request, 'feed.html', {'user': request.user})
     else:
         return render(request, 'pageAccueil.html')
+
 
 def login_user(request):
     if request.method == 'POST':
@@ -26,9 +29,11 @@ def login_user(request):
             return render(request, 'PageConnexion.html', {'error': 'Username or password is incorrect'})
     return render(request, 'PageConnexion.html')
 
+
 def logout_user(request):
     logout(request)
     return redirect('login')
+
 
 def register_user(request):
     if request.method == 'POST':
@@ -42,8 +47,9 @@ def register_user(request):
             prenom = registerForm.cleaned_data['prenom']
             if User.objects.filter(username=username).exists():
                 return render(request, 'PageInscription.html', {'error': 'Username already exists'})
-            else:   
-                user = User.objects.create_user(username=username, password=password, email=email,last_name=nom, first_name=prenom)
+            else:
+                user = User.objects.create_user(username=username, password=password, email=email, last_name=nom,
+                                                first_name=prenom)
                 user.save()
                 profile = Profile(user=user, promo=promo)
                 profile.save()
@@ -52,28 +58,31 @@ def register_user(request):
         return redirect('login')
     else:
         return render(request, 'PageInscription.html')
-    
+
 
 def profile(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        return render(request, 'PageProfile.html', {'user': request.user,'profile': profile})
+        return render(request, 'PageProfile.html', {'user': request.user, 'profile': profile})
     else:
         return redirect('login')
-    
+
 
 def edit_profile(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
-        return render(request, 'PageModification.html', {'user': request.user,'profile': profile})
+        return render(request, 'PageModification.html', {'user': request.user, 'profile': profile})
     else:
         return redirect('login')
 
+
 def presentation(request):
-    return render(request,'PagePresentation.html')
+    return render(request, 'PagePresentation.html')
+
 
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-def connexion(request):
-    return render(request, 'PageConnexion.html')
+
+def forum(request):
+    return render(request, 'PageForum.html')

@@ -1,44 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block head%}
-<link href="{% static 'ConnexionCSS.css' %}" rel="stylesheet">
+{% block head %}
+    <link href="{% static 'ConnexionCSS.css' %}" rel="stylesheet">
 {% endblock %}
 
 
 {% block content %}
-<main class="form-signin w-100 m-auto">
-<form method="post" >
-    {% csrf_token %}
-        <img class="mb-4" src="{% static 'Logo_EMAFamille.PNG' %}" alt="" width="72" height="72">
-        <h1 class="titreProfile">Connexion</h1>
+    <main class="form-signin w-100 m-auto">
+        <form method="post">
+            {% csrf_token %}
+            <img class="mb-4" src="{% static 'Logo_EMAFamille.PNG' %}" alt="" width="72" height="72">
+            <h1 class="titreProfile">Connexion</h1>
 
-        <div class="form-floating">
-            <input type="username" class="form-control" id="floatingInput" placeholder="nom d'utilisateur" name="username">
-            <label for="floatingInput">Identifiant</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-            <label for="floatingPassword">Mot De Passe</label>
-        </div>
+            <div class="form-floating">
+                <input type="username" class="form-control" id="floatingInput" placeholder="nom d'utilisateur"
+                       name="username">
+                <label for="floatingInput">Identifiant</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                       name="password">
+                <label for="floatingPassword">Mot De Passe</label>
+            </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        {{ error }}
-    <button class="w-100 btn btn-lg btn-primary boutons" type="submit">Connexion</button>
-    
-    </form>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            {{ error }}
+            <button class="w-100 btn btn-lg btn-primary boutons" type="submit">Connexion</button>
+
+        </form>
         <a href="/">
             <button class="w-100 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 10px">Retour</button>
         </a>
 
 
-
-
-
-</main>
-<br>
+    </main>
+    <br>
 {% endblock %}

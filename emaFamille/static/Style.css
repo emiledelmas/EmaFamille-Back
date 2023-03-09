@@ -3,41 +3,44 @@
     src: url(AmaticSC-Bold.ttf);
 }
 
-.photoDeProfile{
-    width:20%;
+.photoDeProfile {
+    width: 20%;
 
 }
 
-.titreProfile{
-    color:black;
+.titreProfile {
+    color: black;
     font-family: "AmaticSC-Bold";
 }
-a{
+
+a {
     text-decoration: none;
 }
 
-img{
+img {
     text-decoration: none;
 }
 
-body{
+body {
     background-image: url("fond d'ecran.png");
 }
 
-.conteneur_1{
+.conteneur_1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 200px;
 
 }
-.boutons{
+
+.boutons {
     background-color: #cecece;
     color: #306978;
     border-color: #cecece;
 
 }
-.icones{
+
+.icones {
     height: 16px;
     width: 16px;
     fill: #306978;

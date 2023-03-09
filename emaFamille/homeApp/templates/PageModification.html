@@ -1,82 +1,92 @@
 {% extends 'base.html' %}
 {% block head %}
-<link href="ConnexionCSS.css" rel="stylesheet">
+    <link href="ConnexionCSS.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<main class="text-center w-50 m-auto">
+    <main class="text-center w-50 m-auto">
 
-<div style="text-align: center;">
+        <div style="text-align: center;">
 
-  <h1 class="titreProfile">Modification du Profil</h1>
-
-
-    <label for="username" class="form-label">Nouvel identifiant</label>
-  <div class="col d-grip gap-2 align-items-start">
-    <input type="text" class="form-control" id="username" placeholder="id" required>
-    <div class="invalid-feedback">
-      déja mis deso
-    </div>
-    <a href="PageProfil.html">
-      <button class="w-10 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
-    </a>
-  </div>
+            <h1 class="titreProfile">Modification du Profil</h1>
 
 
-
-  <div class="col-12">
-    <label for="password" class="form-label">Nouveau mot de passe</label>
-    <input type="text" class="form-control" id="password" placeholder="Ananas13" required>
-    <div class="invalid-feedback">
-      déja mis deso
-    </div>
-    <a href="PageProfil.html">
-      <button class="w-10 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
-    </a>
-  </div>
- 
-
-  <div class="col-12">
-    <label for="lastName" class="form-label">Ton Nom</label>
-    <input type="text" class="form-control" id="lastName" placeholder="Bertieaux" required>
-    <div class="invalid-feedback">
-      pas valid
-    </div>
-    <a href="PageProfil.html">
-      <button class="w-10 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
-    </a>
-  </div>
+            <label for="username" class="form-label">Nouvel identifiant</label>
+            <div class="col d-grip gap-2 align-items-start">
+                <input type="text" class="form-control" id="username" placeholder="id" required>
+                <div class="invalid-feedback">
+                    déja mis deso
+                </div>
+                <a href="PageProfil.html">
+                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
+                            style="margin-top: 5px; margin-bottom: 20px">Valider
+                    </button>
+                </a>
+            </div>
 
 
-  <div class="col-12">
-    <label for="firstName" class="form-label">Ton Prénom</label>
-    <input type="text" class="form-control" id="firstname" placeholder="Laura" required>
-    <div class="invalid-feedback">
-      pas valid
-    </div>
-    <a href="PageProfil.html">
-      <button class="w-10 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
-    </a>
-  </div>
-
-  <div class="col-12">
-    <label for="promo" class="form-label">Ta promo</label>
-    <input type="text" class="form-control" id="promo" placeholder="FIG 173" required>
-    <div class="invalid-feedback">
-      pas valid
-    </div>
-    <a href="PageProfil.html">
-      <button class="w-10 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
-    </a>
-  </div>
+            <div class="col-12">
+                <label for="password" class="form-label">Nouveau mot de passe</label>
+                <input type="text" class="form-control" id="password" placeholder="Ananas13" required>
+                <div class="invalid-feedback">
+                    déja mis deso
+                </div>
+                <a href="PageProfil.html">
+                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
+                            style="margin-top: 5px; margin-bottom: 20px">Valider
+                    </button>
+                </a>
+            </div>
 
 
+            <div class="col-12">
+                <label for="lastName" class="form-label">Ton Nom</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Bertieaux" required>
+                <div class="invalid-feedback">
+                    pas valid
+                </div>
+                <a href="PageProfil.html">
+                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
+                            style="margin-top: 5px; margin-bottom: 20px">Valider
+                    </button>
+                </a>
+            </div>
 
-  <br>
-  <br>
-  <a href="PageProfil.html">
-    <button class="w-100 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Retour</button>
-  </a>
-</div>
-</main>
+
+            <div class="col-12">
+                <label for="firstName" class="form-label">Ton Prénom</label>
+                <input type="text" class="form-control" id="firstname" placeholder="Laura" required>
+                <div class="invalid-feedback">
+                    pas valid
+                </div>
+                <a href="PageProfil.html">
+                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
+                            style="margin-top: 5px; margin-bottom: 20px">Valider
+                    </button>
+                </a>
+            </div>
+
+            <div class="col-12">
+                <label for="promo" class="form-label">Ta promo</label>
+                <input type="text" class="form-control" id="promo" placeholder="FIG 173" required>
+                <div class="invalid-feedback">
+                    pas valid
+                </div>
+                <a href="PageProfil.html">
+                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
+                            style="margin-top: 5px; margin-bottom: 20px">Valider
+                    </button>
+                </a>
+            </div>
+
+
+            <br>
+            <br>
+            <a href="PageProfil.html">
+                <button class="w-100 btn btn-lg btn-primary boutons" type="submit"
+                        style="margin-top: 5px; margin-bottom: 20px">Retour
+                </button>
+            </a>
+        </div>
+    </main>
 {% endblock %}
