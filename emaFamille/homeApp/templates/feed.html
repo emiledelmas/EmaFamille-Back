@@ -233,18 +233,17 @@
                         <div class="card-body">
                             <h5 class="card-title">ajout rapide  </h5>
                             <h6 class="card-subtitle mb-2 text-muted">ajoute ces BG </h6>
-                            <div class="card gedf-card">
-                                <div class="card-body">
-                                    <img class="rounded-circle" width="50" src="{% static 'Photo_Charlotte.JPG' %}" alt="">
-                                    <p class="card-text">Charlotte houzé</p>
+                            {% for profile in ajout %}
+                                <div class="card gedf-card">
+                                    <div class="card-body">
+                                        <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
+                                        <p class="card-text h5">@{{  profile.user.username }}</p>
+                                        <a href="/" class="btn btn-primary boutons">
+                                            Ajouter
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card gedf-card">
-                                <div class="card-body">
-                                    <img class="rounded-circle" width="50" src="{% static 'Photo_Laura.jpg' %}" alt="">
-                                    <p class="card-text">Laura Bertieaux</p>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
             </div>

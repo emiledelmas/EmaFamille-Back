@@ -29,12 +29,14 @@ def home(request):
             profiles = Profile.objects.filter(user__username__icontains=query) if query else Profile.objects.all()
 
             profile = Profile.objects.get(user=request.user)
-            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query})
+            ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout})
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
             profile = Profile.objects.get(user=request.user)
-            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile})
+            ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout})
         else:
             return render(request, 'pageAccueil.html')
 
@@ -92,7 +94,8 @@ def profile_famille(request):
         profile = Profile.objects.get(user=request.user)
         famille = profile.famille
         profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")[:2]
-        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles})
+        nb_membre=Profile.objects.filter(famille=profile.famille).count()
+        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre})
     else: 
         return redirect('PageFamille.html')
 
