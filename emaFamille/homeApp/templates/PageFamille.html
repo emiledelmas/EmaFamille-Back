@@ -100,18 +100,14 @@
                         <div class="card-body">
                             <h5 class="card-title"> Membres </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Guette ces gueules </h6>
-                            <div class="card gedf-card">
-                                <div class="card-body">
-                                    <img class="rounded-circle" width="50" src="{% static 'Photo_Charlotte.JPG' %}" alt="">
-                                    <p class="card-text">Charlotte houzé</p>
+                            {% for profile in profiles %}
+                                <div class="card gedf-card">
+                                    <div class="card-body">
+                                        <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
+                                        <p class="card-text h5">@{{  profile.user.username }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card gedf-card">
-                                <div class="card-body">
-                                    <img class="rounded-circle" width="50" src="{% static 'Photo_Laura.jpg' %}" alt="">
-                                    <p class="card-text">Laura Bertieaux</p>
-                                </div>
-                            </div>
+                            {% endfor %}
 
 
                         </div>
@@ -181,7 +177,8 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="{% static 'Photo_Emile.JPG' %}" alt="">
+                                        <img class="rounded-circle" width="45" src="{% static 'Photo_Emile.JPG' %}"
+                                             alt="">
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0">@EmileD</div>

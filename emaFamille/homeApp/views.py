@@ -91,7 +91,8 @@ def profile_famille(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
         famille = profile.famille
-        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille})
+        profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")[:2]
+        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles})
     else: 
         return redirect('PageFamille.html')
 
