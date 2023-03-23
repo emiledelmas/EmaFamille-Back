@@ -30,13 +30,15 @@ def home(request):
 
             profile = Profile.objects.get(user=request.user)
             ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
-            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout})
+            famille = profile.famille
+            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout, 'famille': famille})
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
             profile = Profile.objects.get(user=request.user)
             ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
-            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout})
+            famille = profile.famille
+            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille})
         else:
             return render(request, 'pageAccueil.html')
 
