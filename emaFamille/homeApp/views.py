@@ -87,7 +87,12 @@ def profile(request):
     else:
         return redirect('login')
 
-    
+def profile_famille(request):
+    if request.user.is_authenticated:
+        famille=Profile.object.get(famille)
+        return render(request, 'PageFamille.html',)
+    else:
+        return redirect('PageFamille.html')
 
 def edit_profile(request):
     if request.user.is_authenticated:
@@ -102,5 +107,5 @@ def presentation(request):
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-def connexion(request):
-    return render(request, 'PageConnexion.html')
+def famille(request):
+    return render(request, 'PageFamille.html')
