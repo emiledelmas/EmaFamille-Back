@@ -10,79 +10,55 @@
 
             <h1 class="titreProfile">Modification du Profil</h1>
 
-
+            <form method="post">
+                {% csrf_token %}
             <label for="username" class="form-label">Nouvel identifiant</label>
             <div class="col d-grip gap-2 align-items-start">
-                <input type="text" class="form-control" id="username" placeholder="id" required>
+                <input type="text" class="form-control" id="username" value="{{ user.username  }}" name="username" required>
                 <div class="invalid-feedback">
                     déja mis deso
                 </div>
-                <a href="PageProfil.html">
-                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
-                            style="margin-top: 5px; margin-bottom: 20px">Valider
-                    </button>
-                </a>
-            </div>
 
-
-            <div class="col-12">
-                <label for="password" class="form-label">Nouveau mot de passe</label>
-                <input type="text" class="form-control" id="password" placeholder="Ananas13" required>
-                <div class="invalid-feedback">
-                    déja mis deso
-                </div>
-                <a href="PageProfil.html">
-                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
-                            style="margin-top: 5px; margin-bottom: 20px">Valider
-                    </button>
-                </a>
             </div>
 
 
             <div class="col-12">
                 <label for="lastName" class="form-label">Ton Nom</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Bertieaux" required>
+                <input type="text" class="form-control" id="lastName" value="{{ user.name  }}" name="name">
                 <div class="invalid-feedback">
                     pas valid
                 </div>
-                <a href="PageProfil.html">
-                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
-                            style="margin-top: 5px; margin-bottom: 20px">Valider
-                    </button>
-                </a>
+
             </div>
 
 
             <div class="col-12">
                 <label for="firstName" class="form-label">Ton Prénom</label>
-                <input type="text" class="form-control" id="firstname" placeholder="Laura" required>
+                <input type="text" class="form-control" id="firstname"   name="first_name" >
                 <div class="invalid-feedback">
                     pas valid
                 </div>
-                <a href="PageProfil.html">
-                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
-                            style="margin-top: 5px; margin-bottom: 20px">Valider
-                    </button>
-                </a>
+
             </div>
 
             <div class="col-12">
                 <label for="promo" class="form-label">Ta promo</label>
-                <input type="text" class="form-control" id="promo" placeholder="FIG 173" required>
+                <input type="text" class="form-control" id="promo" value="{{ profile.promo }}" name="promo" required>
                 <div class="invalid-feedback">
                     pas valid
                 </div>
-                <a href="PageProfil.html">
+                    <br><br><br>
                     <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
                             style="margin-top: 5px; margin-bottom: 20px">Valider
                     </button>
-                </a>
+
             </div>
+            </form>
 
 
             <br>
             <br>
-            <a href="PageProfil.html">
+            <a href="/profile/">
                 <button class="w-100 btn btn-lg btn-primary boutons" type="submit"
                         style="margin-top: 5px; margin-bottom: 20px">Retour
                 </button>
