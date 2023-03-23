@@ -9,7 +9,7 @@
         <div style="text-align: center;">
 
             <h1 class="titreProfile">Modification du Profil</h1>
-
+            <p>{{ error }}</p>
             <form method="post">
                 {% csrf_token %}
             <label for="username" class="form-label">Nouvel identifiant</label>
@@ -24,7 +24,7 @@
 
             <div class="col-12">
                 <label for="lastName" class="form-label">Ton Nom</label>
-                <input type="text" class="form-control" id="lastName" value="{{ user.name  }}" name="name">
+                <input type="text" class="form-control" id="lastName" value="{{ user.last_name  }}" name="nom">
                 <div class="invalid-feedback">
                     pas valid
                 </div>
@@ -34,7 +34,7 @@
 
             <div class="col-12">
                 <label for="firstName" class="form-label">Ton Prénom</label>
-                <input type="text" class="form-control" id="firstname"   name="first_name" >
+                <input type="text" class="form-control" id="firstname" value="{{ user.first_name  }}" valuename="prenom" >
                 <div class="invalid-feedback">
                     pas valid
                 </div>

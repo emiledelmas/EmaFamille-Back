@@ -7,7 +7,7 @@ from .models import Profile, Post_Feed,Famille
 
 
 # Import forms
-from .forms import LoginForm, RegisterForm, FeedForm
+from .forms import LoginForm, RegisterForm, FeedForm, EditProfileForm
 # Create your views here.
 def home(request):
     if request.method == "POST":
@@ -96,11 +96,35 @@ def profile_famille(request):
         return redirect('PageFamille.html')
 
 def edit_profile(request):
-    if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        return render(request, 'PageModification.html', {'user': request.user,'profile': profile})
+    if request.method == 'POST':
+        editProfileForm = EditProfileForm(request.POST)
+        if editProfileForm.is_valid():
+            username = editProfileForm.cleaned_data['username']
+            promo = editProfileForm.cleaned_data['promo']
+            nom = editProfileForm.cleaned_data['nom']
+            prenom = editProfileForm.cleaned_data['prenom']
+            if request.user.username != username and User.objects.filter(username=username).exists():
+                return render(request, 'PageModification.html', {'error': 'Username already exists'})
+            else:
+                user = User.objects.get(username=request.user.username)
+                user.username = username
+                user.last_name = nom
+                user.first_name = prenom
+                user.save()
+                profile = Profile.objects.get(user=user)
+                profile.promo = int(promo)
+                profile.save()
+                return redirect('edit_profile')
+        else:
+            return render(request, 'PageModification.html', {'error': 'Edit profile form is not valid'})
+
     else:
-        return redirect('login')
+        if request.user.is_authenticated:
+            user = User.objects.get(username=request.user.username)
+            profile = Profile.objects.get(user=request.user)
+            return render(request, 'PageModification.html', {'user': user,'profile': profile})
+        else:
+            return redirect('login')
 
 def presentation(request):
     return render(request,'PagePresentation.html')
@@ -108,5 +132,3 @@ def presentation(request):
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-def famille(request):
-    return render(request, 'PageFamille.html')
