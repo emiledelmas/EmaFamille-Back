@@ -92,5 +92,5 @@ def presentation(request):
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-def connexion(request):
-    return render(request, 'PageConnexion.html')
+def famille(request):
+    return render(request, 'PageFamille.html')
