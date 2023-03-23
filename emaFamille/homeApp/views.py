@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from .models import Profile, Post_Feed
+from .models import Profile, Post_Feed,Famille
 
 
 # Import forms
@@ -89,9 +89,10 @@ def profile(request):
 
 def profile_famille(request):
     if request.user.is_authenticated:
-        famille=Profile.object.get(famille)
-        return render(request, 'PageFamille.html',)
-    else:
+        profile = Profile.objects.get(user=request.user)
+        famille = profile.famille
+        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille})
+    else: 
         return redirect('PageFamille.html')
 
 def edit_profile(request):
