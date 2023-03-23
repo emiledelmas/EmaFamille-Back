@@ -7,15 +7,19 @@ from .models import Profile, Post_Feed
 
 
 # Import forms
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, FeedForm
 # Create your views here.
 def home(request):
     if request.method == "POST":
-        texte = request.POST.get("texte")
-        image = request.POST.get("image")
-        post_feed = Post_Feed(auteur=request.user,texte=texte,image=image)
-        post_feed.save()
-        return redirect('home')
+        feedform = FeedForm(request.POST,request.FILES)
+        if feedform.is_valid():
+            texte = feedform.cleaned_data['texte']
+            image = feedform.cleaned_data['image']
+            post = Post_Feed(auteur=request.user, texte=texte, image=image)
+            post.save()
+            return redirect('home')
+        else:
+            return render(request, 'feed.html', {'error': 'Feed form is not valid'})
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")

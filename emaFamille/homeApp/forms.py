@@ -11,3 +11,7 @@ class RegisterForm(forms.Form):
     promo = forms.IntegerField(label='promo')
     nom = forms.CharField(label='nom', max_length=100)
     prenom = forms.CharField(label='prenom', max_length=100)
+
+class FeedForm(forms.Form):
+    texte = forms.CharField(label='texte', max_length=1000, required=False)
+    image = forms.ImageField(label='image', required=False)
