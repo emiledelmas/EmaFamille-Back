@@ -23,6 +23,7 @@ class Profile(models.Model):
 
 
 
+
 class Post_Feed(models.Model):
     auteur = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     date = models.DateTimeField(auto_now_add=True)

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from .models import Profile, Post_Feed
+from .models import Profile, Post_Feed,Famille
 
 
 # Import forms
@@ -11,15 +11,25 @@ from .forms import LoginForm, RegisterForm, FeedForm
 # Create your views here.
 def home(request):
     if request.method == "POST":
-        feedform = FeedForm(request.POST,request.FILES)
-        if feedform.is_valid():
-            texte = feedform.cleaned_data['texte']
-            image = feedform.cleaned_data['image']
-            post = Post_Feed(auteur=request.user, texte=texte, image=image)
-            post.save()
-            return redirect('home')
-        else:
-            return render(request, 'feed.html', {'error': 'Feed form is not valid'})
+        if request.POST["postType"] == "postFeed":
+            feedform = FeedForm(request.POST,request.FILES)
+            if feedform.is_valid():
+                texte = feedform.cleaned_data['texte']
+                image = feedform.cleaned_data['image']
+                post = Post_Feed(auteur=request.user, texte=texte, image=image)
+                post.save()
+                return redirect('home')
+            else:
+                return render(request, 'feed.html', {'error': 'Feed form is not valid'})
+        elif request.POST["postType"] == "search":
+            query = request.POST["query"]
+            posts_feed = Post_Feed.objects.filter(texte__icontains=query).order_by("-date") if query else Post_Feed.objects.all().order_by("-date")
+
+            # Recherche des profils correspondant à l'utilisateur recherché
+            profiles = Profile.objects.filter(user__username__icontains=query) if query else Profile.objects.all()
+
+            profile = Profile.objects.get(user=request.user)
+            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query})
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
@@ -77,7 +87,13 @@ def profile(request):
     else:
         return redirect('login')
 
-    
+def profile_famille(request):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        famille = profile.famille
+        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille})
+    else: 
+        return redirect('PageFamille.html')
 
 def edit_profile(request):
     if request.user.is_authenticated:
@@ -92,5 +108,5 @@ def presentation(request):
 def inscription(request):
     return render(request, 'PageInscription.html')
 
-def connexion(request):
-    return render(request, 'PageConnexion.html')
+def famille(request):
+    return render(request, 'PageFamille.html')
