@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
-
+from django.http import HttpResponse
 from .models import Profile, Post_Feed,Famille
 
 
@@ -11,27 +11,15 @@ from .forms import LoginForm, RegisterForm, FeedForm, EditProfileForm
 # Create your views here.
 def home(request):
     if request.method == "POST":
-        if request.POST["postType"] == "postFeed":
-            feedform = FeedForm(request.POST,request.FILES)
-            if feedform.is_valid():
-                texte = feedform.cleaned_data['texte']
-                image = feedform.cleaned_data['image']
-                post = Post_Feed(auteur=request.user, texte=texte, image=image)
-                post.save()
-                return redirect('home')
-            else:
-                return render(request, 'feed.html', {'error': 'Feed form is not valid'})
-        elif request.POST["postType"] == "search":
-            query = request.POST["query"]
-            posts_feed = Post_Feed.objects.filter(texte__icontains=query).order_by("-date") if query else Post_Feed.objects.all().order_by("-date")
-
-            # Recherche des profils correspondant à l'utilisateur recherché
-            profiles = Profile.objects.filter(user__username__icontains=query) if query else Profile.objects.all()
-
-            profile = Profile.objects.get(user=request.user)
-            ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
-            famille = profile.famille
-            return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout, 'famille': famille})
+        feedform = FeedForm(request.POST,request.FILES)
+        if feedform.is_valid():
+            texte = feedform.cleaned_data['texte']
+            image = feedform.cleaned_data['image']
+            post = Post_Feed(auteur=request.user, texte=texte, image=image)
+            post.save()
+            return redirect('home')
+        else:
+            return render(request, 'feed.html', {'error': 'Feed form is not valid'})
     else:
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
@@ -41,6 +29,20 @@ def home(request):
             return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille})
         else:
             return render(request, 'pageAccueil.html')
+
+
+def search(request):
+    if request.method == 'POST':
+        query = request.POST["query"]
+        posts_feed = Post_Feed.objects.filter(texte__icontains=query).order_by("-date") if query else Post_Feed.objects.all().order_by("-date")
+        # Recherche des profils correspondant à l'utilisateur recherché
+        profiles = Profile.objects.filter(user__username__icontains=query) if query else Profile.objects.all()
+        profile = Profile.objects.get(user=request.user)
+        ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+        famille = profile.famille
+        return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout, 'famille': famille})
+    else:
+        return redirect('home')
 
 def login_user(request):
     if request.method == 'POST':
@@ -135,6 +137,18 @@ def edit_profile(request):
 def presentation(request):
     return render(request,'PagePresentation.html')
 
-def inscription(request):
-    return render(request, 'PageInscription.html')
-
+def like(request):
+    if request.method == 'POST':
+        post_id = request.POST['post_id']
+        post = Post_Feed.objects.get(id=post_id)
+        user = request.user
+        if user in post.likes.all():
+            post.likes.remove(user)
+            status = 0
+        else:
+            post.likes.add(user)
+            status = 1
+        # return redirect('home')
+        return HttpResponse(str(status)+'-'+str(post.likes.count()))
+    else:
+        return redirect('home')

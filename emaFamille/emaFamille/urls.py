@@ -28,8 +28,9 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('presentation', views.presentation, name='presentation'),
-    path('inscription', views.inscription, name='inscription'),
     path('famille', views.profile_famille, name='famille'),
+    path('like', views.like, name='like'),
+    path('search', views.search, name='search'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

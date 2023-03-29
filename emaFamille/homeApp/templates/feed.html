@@ -48,7 +48,7 @@
         <nav class="navbar navbar-light bg-white">
             <a href="#" class="navbar-brand">EmaFamille</a>
 
-            <form class="form-inline" method="post">
+            <form class="form-inline" method="post" action="{% url 'search' %}">
                 {% csrf_token %}
                 <input type="hidden" value="search" name="postType">
                 <div class="input-group">
@@ -214,9 +214,55 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                                <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                                <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                            {% comment %} <form action="{% url 'like' %}" method="post" id="likeForm{{ post.id }}">
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ post.id }}">
+                                <a href="javascript:void(0);" onclick="document.getElementById('likeForm{{ post.id }}').submit();" class="card-link" style="{% if user not in post.likes.all %}color:grey;{% endif %}">
+                                    <i class="fa fa-thumbs-up"></i> {{ post.likes.count }} Like{{ post.likes.count|pluralize }}
+                                </a>
+                                <a href="" class="card-link" style="color:grey;"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="" class="card-link" style="color:grey;"><i class="fa fa-mail-forward"></i> Share</a>
+                            </form> {% endcomment %}
+                    
+
+
+                            <a href="javascript:void(0)" class="card-link"  id="like{{ post.id }}" {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
+                                    <i class="fa fa-thumbs-up"></i> 
+                                    {{ post.likes.count }} Like{{ post.likes.count|pluralize }}
+                                   
+                                </a>
+                                <a href="" class="card-link" style="color:grey;"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="" class="card-link" style="color:grey;"><i class="fa fa-mail-forward"></i> Share</a>
+                               
+                                <script>
+
+                                    const csrftoken{{ post.id }} = '{{ csrf_token }}'
+                        
+                                    document.getElementById('like{{ post.id }}').onclick = () => {
+                                
+                                        const requestObj = new XMLHttpRequest()
+                                        requestObj.onreadystatechange = function () {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                console.log(this.responseText)
+                                                if (this.responseText[0] == '1') {
+                                                    document.getElementById('like{{ post.id }}').style.color = '#007bff';
+                                                } else {
+                                                    document.getElementById('like{{ post.id }}').style.color = 'grey';
+                                                }
+                                                let likesCount = this.responseText.split("-")[1].trim(); // extract the second number after "-"
+                                                let pluralizeLikeWord = (likesCount == 1) ? " Like" : " Likes"; // pluralize the word "Like"
+                                                document.getElementById('like{{ post.id }}').innerHTML = '<i class="fa fa-thumbs-up"></i> '+ likesCount + pluralizeLikeWord; // update the number of likes
+                                            }
+                                        }
+                    
+                                        requestObj.open("POST", "{% url 'like' %}")
+                                        requestObj.setRequestHeader("X-CSRFToken", csrftoken{{ post.id }})
+                        
+                                        const formdata = new FormData()
+                                        formdata.append('post_id', '{{ post.id }}')
+                                        requestObj.send(formdata)
+                                    }
+                                </script>
                             </div>
                         </div>
                         <!-- Post /////-->
@@ -276,5 +322,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
 
 {% endblock content %}

@@ -22,13 +22,12 @@ class Profile(models.Model):
         return self.user.username
 
 
-
-
 class Post_Feed(models.Model):
     auteur = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     date = models.DateTimeField(auto_now_add=True)
     texte = models.TextField(max_length=360)
     image = models.ImageField(upload_to='media/feed', null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
     def __str__(self):
         return self.texte
 
