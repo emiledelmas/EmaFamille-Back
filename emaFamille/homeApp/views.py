@@ -98,9 +98,15 @@ def profile_famille(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
         famille = profile.famille
-        profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")[:2]
-        nb_membre=Profile.objects.filter(famille=profile.famille).count()
-        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre})
+        ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+        if famille == None:
+            return render(request, 'PageCréationDeFamille.html', {'user': request.user, 'profile': profile,'ajout': ajout})
+        else:
+            profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")[:2]
+            nb_membre = Profile.objects.filter(famille=profile.famille).count()
+            return render(request, 'PageFamille.html',
+                          {'user': request.user, 'profile': profile, 'famille': famille, 'profiles': profiles,
+                           'nb_membre': nb_membre})
     else: 
         return redirect('PageFamille.html')
 
@@ -153,6 +159,7 @@ def like(request):
         return HttpResponse(str(status)+'-'+str(post.likes.count()))
     else:
         return redirect('home')
+
 
 def ajout_rapide(request):
     if request.method=='POST':
