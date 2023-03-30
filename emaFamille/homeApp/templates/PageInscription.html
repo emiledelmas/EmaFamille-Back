@@ -16,8 +16,9 @@
 
     <div class="container">
         <main class="form-signin w-100 m-auto">
-            <img class="mb-4" src=Logo_EMAFamille.PNG alt="" width="72" height="72">
+            <img class="mb-4" src="{% static 'Logo_EMAFamille.PNG' %}" alt="" width="72" height="72">
             <h1 class="titreProfile">Inscription</h1>
+            <p>{{ error }} </p>
             <p>Veuillez renseigner les champs suivants :</p>
 
             <div class="py-5 text-center">
@@ -25,13 +26,12 @@
 
                 <div class="row g-5">
                     <div class="">
-                        <form class="needs-validation" method="post">
+                        <form class="needs-validation" method="post" >
                             {% csrf_token %}
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Prénom</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="Prénom"
-                                           name="prenom" value="" required>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Prénom" name="prenom" value="" required>
                                     <div class="invalid-feedback">
                                         Valid first name is required.
                                     </div>
@@ -39,8 +39,7 @@
 
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Nom</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="Nom" name="nom"
-                                           value="" required>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Nom" name="nom" value="" required>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>

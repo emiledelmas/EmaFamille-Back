@@ -79,6 +79,7 @@ def register_user(request):
                 user.save()
                 profile = Profile(user=user, promo=promo)
                 profile.save()
+                return redirect('login')
         else:
             return render(request, 'PageInscription.html', {'error': 'Register form is not valid'})
         return redirect('login')

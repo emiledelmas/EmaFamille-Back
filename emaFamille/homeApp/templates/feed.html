@@ -70,7 +70,9 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <img class="rounded-circle" width="200" src="{{ profile.photo.url }}" alt="">
+                            {% if profile.photo %}
+                                <img class="rounded-circle" width="200" src="{{ profile.photo.url }}" alt="">
+                            {% endif %}
                             <br>
                             <div class="h5">@{{ user.username }}</div>
                             <div class="h7 text-muted">{{ user.first_name }} {{ user.last_name }}</div>
@@ -237,7 +239,7 @@
                                 <script>
 
                                     const csrftoken{{ post.id }} = '{{ csrf_token }}'
-                        
+                                    
                                     document.getElementById('like{{ post.id }}').onclick = () => {
                                 
                                         const requestObj = new XMLHttpRequest()

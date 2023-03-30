@@ -15,7 +15,7 @@ class Famille(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='media/pp', null=True, blank=True)
+    photo = models.ImageField(upload_to='media/pp', default="media/pp/default.jpg")
     promo = models.IntegerField()
     famille=models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='Profile', blank=True,null=True)
     def __str__(self):
