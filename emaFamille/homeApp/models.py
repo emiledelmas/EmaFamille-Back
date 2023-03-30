@@ -18,6 +18,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='media/pp', default="media/pp/default.jpg")
     promo = models.IntegerField()
     famille=models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='Profile', blank=True,null=True)
+    amis = models.ManyToManyField(User, related_name='friends', blank=True)
     def __str__(self):
         return self.user.username
 
