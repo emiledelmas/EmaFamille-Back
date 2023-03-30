@@ -226,14 +226,14 @@
                     
 
 
-                            <a href="javascript:void(0)" class="card-link"  id="like{{ post.id }}" {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
+                            <a href="javascript:void(0)" class="card-link" id="like{{ post.id }}" {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
                                     <i class="fa fa-thumbs-up"></i> 
                                     {{ post.likes.count }} Like{{ post.likes.count|pluralize }}
                                    
                                 </a>
-                                <a href="" class="card-link" style="color:grey;"><i class="fa fa-comment"></i> Comment</a>
+                                <a href="javascript:void(0)" class="card-link" style="color:grey;" id="comment{{ post.id }}"><i class="fa fa-comment"></i> Comment</a>
                                 <a href="" class="card-link" style="color:grey;"><i class="fa fa-mail-forward"></i> Share</a>
-                               
+                               <textarea class="form-control" id="commentTextArea{{ post.id }}" rows="3" style="display:none;margin-top:10px"></textarea>
                                 <script>
 
                                     const csrftoken{{ post.id }} = '{{ csrf_token }}'
@@ -261,6 +261,11 @@
                                         const formdata = new FormData()
                                         formdata.append('post_id', '{{ post.id }}')
                                         requestObj.send(formdata)
+                                    }
+
+
+                                    document.getElementById('comment{{ post.id }}').onclick = () => {
+                                        document.getElementById('commentTextArea{{ post.id }}').style.display = 'block';
                                     }
                                 </script>
                             </div>
