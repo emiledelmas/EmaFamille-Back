@@ -103,7 +103,9 @@
                             {% for profile in profiles %}
                                 <div class="card gedf-card">
                                     <div class="card-body">
+                                        {% if profil.photo %}
                                         <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
+                                        {% endif %}
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
                                         <a href="/" class="btn btn-primary boutons">
                                             Ajouter

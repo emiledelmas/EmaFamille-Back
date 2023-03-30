@@ -24,7 +24,7 @@ def home(request):
         if request.user.is_authenticated:
             posts_feed = Post_Feed.objects.all().order_by("-date")
             profile = Profile.objects.get(user=request.user)
-            ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+            ajout = Profile.objects.all().exclude(user=request.user).exclude(user__in=profile.amis.all()).order_by("?")[:2]
             famille = profile.famille
             return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille})
         else:
@@ -98,7 +98,7 @@ def profile_famille(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
         famille = profile.famille
-        profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")[:2]
+        profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).exclude(user__in=profile.amis.all()).order_by("?")[:2]
         nb_membre=Profile.objects.filter(famille=profile.famille).count()
         return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre})
     else: 
