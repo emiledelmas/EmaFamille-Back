@@ -153,3 +153,12 @@ def like(request):
         return HttpResponse(str(status)+'-'+str(post.likes.count()))
     else:
         return redirect('home')
+
+def ajout_rapide(request):
+    if request.method=='POST':
+        user_id=request.POST['user_id']
+        ami=User.objects.get(id=user_id)
+
+        profile=Profile.objects.get(user=request.user)
+        profile.amis.add(ami)
+        return redirect('home')

@@ -304,9 +304,14 @@
                                         <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
                                         {% endif %}
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
-                                        <a href="/" class="btn btn-primary boutons">
+                                      <form action="{% url 'ajout_rapide' %}" method="post" id="ajout_rapide{{ profile.id }}">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{ profile.user.id }}">
+                                 <a href="javascript:void(0);" onclick="document.getElementById('ajout_rapide{{ profile.id }}').submit();"  class="btn btn-primary boutons">
                                             Ajouter
                                         </a>
+                            </form>
+
                                     </div>
                                 </div>
                             {% endfor %}

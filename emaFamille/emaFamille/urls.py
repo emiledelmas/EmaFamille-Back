@@ -31,6 +31,7 @@ urlpatterns = [
     path('famille', views.profile_famille, name='famille'),
     path('like', views.like, name='like'),
     path('search', views.search, name='search'),
+    path('ajout_rapide', views.ajout_rapide, name='ajout_rapide')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
