@@ -7,7 +7,7 @@ from .models import Profile, Post_Feed,Famille
 
 
 # Import forms
-from .forms import LoginForm, RegisterForm, FeedForm, EditProfileForm
+from .forms import LoginForm, RegisterForm, FeedForm, EditProfileForm, RegisterFamilyForm
 # Create your views here.
 def home(request):
     if request.method == "POST":
@@ -169,3 +169,25 @@ def ajout_rapide(request):
         profile=Profile.objects.get(user=request.user)
         profile.amis.add(ami)
         return redirect('home')
+
+def register_family(request):
+    if request.method == 'POST':
+        registerForm = RegisterFamilyForm(request.POST)
+        if registerForm.is_valid():
+            chef = registerForm.cleaned_data['chef']
+            nom = registerForm.cleaned_data['nom']
+            drive = registerForm.cleaned_data['drive']
+            logo = registerForm.cleaned_data['logo']
+            description = registerForm.cleaned_data['description']
+
+            if Famille.objects.filter(nom=nom).exists():
+                return render(request, 'famille' , {'error': 'Username already exists'})
+            else:
+                family = Famille.objects.create_user(nom=nom, logo=logo, description=description,drive=drive)
+                family.save()
+                return render(request,'feed.html')
+        else:
+            return render(request, 'PageCréationDeFamille.html', {'error': 'Register form is not valid'})
+        return render(request,'feed.html')
+    else:
+        return render(request, 'PageCréationDeFamille.html')
