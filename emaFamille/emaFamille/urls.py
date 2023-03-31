@@ -33,6 +33,7 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('ajout_rapide', views.ajout_rapide, name='ajout_rapide'),
     path('registerfamily/', views.register_family, name='registerfamily'),
+    path('comment', views.comment, name='comment'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Profile, Post_Feed,Famille
+from .models import Profile, Post_Feed,Famille, Comment
 
 
 # Import forms
@@ -26,7 +26,8 @@ def home(request):
             profile = Profile.objects.get(user=request.user)
             ajout = Profile.objects.all().exclude(user=request.user).exclude(user__in=profile.amis.all()).order_by("?")[:2]
             famille = profile.famille
-            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille})
+            comments = Comment.objects.all()
+            return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille,'comments':comments})
         else:
             return render(request, 'pageAccueil.html')
 
@@ -82,7 +83,6 @@ def register_user(request):
                 return redirect('login')
         else:
             return render(request, 'PageInscription.html', {'error': 'Register form is not valid'})
-        return redirect('login')
     else:
         return render(request, 'PageInscription.html')
     
@@ -184,3 +184,16 @@ def register_family(request):
         return render(request,'feed.html')
     else:
         return render(request, 'PageCréationDeFamille.html')
+    
+
+def comment(request):
+    if request.method == 'POST':
+        post_id = request.POST['post_id']
+        post = Post_Feed.objects.get(id=post_id)
+        user = request.user 
+        text = request.POST['text']
+        comment = Comment(post=post, auteur=user, body=text)
+        comment.save()
+        return redirect('home')
+    else:
+        return redirect('home')
