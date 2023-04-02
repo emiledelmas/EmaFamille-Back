@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -44,13 +45,13 @@
         <!-- Card Group with img as a social network feed in one column -->
 
         <nav class="navbar navbar-light bg-white">
-            <a href="#" class="navbar-brand">EmaFamille</a>
+             <a href="#" class="navbar-brand">EmaFamille</a>
 
             <div class="col d-grip gap-2 align-items-start">
 
                 <div>
                     <a href="/" class="btn btn-primary boutons">
-                        Page Perso
+                        <i class="fa fa-home"></i> Page Perso
                     </a>
                 </div>
             </div>
@@ -77,7 +78,7 @@
                         <div class="card-body">
 
                             {% if famille.logo %}
-                                <img class="rounded-circle" width="200" src="{{ famille.logo.url }}" alt="">
+                                <img width="50%" height="50%" src="{{ famille.logo.url }}" alt="">
                             {% endif %}
                             <br>
                             <div class="h5">{{ famille.nom }}</div>
@@ -98,18 +99,47 @@
                     </div>
                     <div class="card gedf-card">
                         <div class="card-body">
+                            <h5 class="card-title"> Chef de famille </h5>
+                                <div class="card gedf-card">
+                                    <div class="card-body">
+                                        <img class="rounded-circle" width="50" height="50" src="{{ famille.chef.profile.photo.url }}" alt="">
+                                        <p class="card-text h5">@{{ famille.chef.username }}</p>
+                                        <p class="card-text h7">{{ famille.chef.first_name }} {{ famille.chef.last_name }}</p>
+                                    </div>
+                                </div>
+                            {% if user == famille.chef %}
+                                <a href="{% url 'editFamily'%}" class="btn boutons">
+                                <i class="fa fa-edit"></i>
+                                    Modifier la famille
+                                </a>
+                                <a href="{% url 'showPendingFamilyRequest'%}" class="btn boutons">
+                                    <i class="fa fa-inbox"></i>
+                                    Voir les demandes
+                                </a>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    <div class="card gedf-card">
+                        <div class="card-body">
                             <h5 class="card-title"> Membres </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Guette ces gueules </h6>
                             {% for profile in profiles %}
                                 <div class="card gedf-card">
                                     <div class="card-body">
-                                        {% if profil.photo %}
-                                        <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
-                                        {% endif %}
+                                        <img class="rounded-circle" width="50" height="50" src="{{ profile.photo.url }}" alt="">
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
-                                        <a href="/" class="btn btn-primary boutons">
-                                            Ajouter
-                                        </a>
+
+                                        {% if user == famille.chef %}
+                                        <form action="{% url 'removeUserFromFamily' profile.user.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-ban"></i>
+                                                Exclure de la famille
+                                            </button>
+                                        </form>
+                                        {% endif %}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -120,74 +150,18 @@
                 </div>
                 <div class="col-md-6 gedf-main">
 
-                    <!--- \\\\\\\Post-->
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                       aria-controls="posts" aria-selected="true">Faire une publication</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="images-tab" data-toggle="tab" role="tab"
-                                       aria-controls="images" aria-selected="false" href="#images">Images</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                     aria-labelledby="posts-tab">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="message">post</label>
-                                        <textarea class="form-control" id="message" rows="3"
-                                                  placeholder="A quoi pensez-vous?"></textarea>
-                                    </div>
-
-                                </div>
-                                <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                                    <div class="form-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Uploader l'image</label>
-                                        </div>
-                                    </div>
-                                    <div class="py-4"></div>
-                                </div>
-                            </div>
-                            <div class="btn-toolbar justify-content-between">
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary">Publier</button>
-                                </div>
-                                <div class="btn-group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        <i class="fa fa-globe"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                        <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Famille</a>
-                                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Amis</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Post /////-->
-
+                    {% for post in posts %}
                     <!--- \\\\\\\Post-->
                     <div class="card gedf-card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="{% static 'Photo_Emile.JPG' %}"
-                                             alt="">
+                                        <img class="rounded-circle" width="45" height="45" src="{{ post.auteur.profile.photo.url}}" alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0">@EmileD</div>
-                                        <div class="h7 text-muted">Emile Delmas</div>
+                                        <div class="h5 m-0">@{{ post.auteur }}</div>
+                                        <div class="h7 text-muted">{{ post.auteur.first_name }} {{ post.auteur.last_name }}</div>
                                     </div>
                                 </div>
                                 <div>
@@ -197,10 +171,9 @@
                                             <i class="fa fa-ellipsis-h"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <a class="dropdown-item" href="#">Save</a>
-                                            <a class="dropdown-item" href="#">Hide</a>
-                                            <a class="dropdown-item" href="#">Report</a>
+                                            <div class="h6 dropdown-header">Avancé</div>
+                                            <a class="dropdown-item" href="#">Supprimer</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -208,150 +181,115 @@
 
                         </div>
                         <div class="card-body">
-
-                            <img src="{% static 'Logo_EMAFamille.PNG' %}" class="img-fluid" alt="image desc">
-                            <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> il y a 10 min</div>
+                            {% if post.image %}
+                                <img src="{{ post.image.url }}" class="img-fluid" alt="image desc">
+                            {% endif %}
+                            <div class="text-muted h7 mb-2 align-items-center"><i
+                                    class="fa fa-clock-o"></i> {{ post.date| naturaltime }} </div>
                             <a class="card-link" href="#">
-                                <h5 class="card-title text-dark">Aujoud'hui nous lançons EmaFamille</h5>
+                                <h5 class="card-title text-dark"></h5>
                             </a>
 
                             <p class="card-text">
-                                Voili Voilou !
-                                Lancez vous !
+                                {{ post.texte|linebreaks }}
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        </div>
-                    </div>
-                    <!-- Post /////-->
+                
 
 
-                    <!--- \\\\\\\Post-->
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">@LeeCross</div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <a class="dropdown-item" href="#">Save</a>
-                                            <a class="dropdown-item" href="#">Hide</a>
-                                            <a class="dropdown-item" href="#">Report</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card-body">
-                            <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> 10 min ago</div>
-                            <a class="card-link" href="#">
-                                <h5 class="card-title"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-                                    consectetur
-                                    deserunt illo esse distinctio.</h5>
+                        <a href="javascript:void(0)" class="card-link" id="like{{ post.id }}" {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
+                                <i class="fa fa-thumbs-up"></i> 
+                                {{ post.likes.count }} Like{{ post.likes.count|pluralize }}                
                             </a>
 
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam
-                                est, voluptates officiis iure soluta
-                                alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae
-                                repellendus. Lorem
-                                ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque,
-                                reprehenderit!
-                                Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga
-                                quae.
-                                Consectetur id molestias itaque facere? Hic!
-                            </p>
-                            <div>
-                                <span class="badge badge-primary">JavaScript</span>
-                                <span class="badge badge-primary">Android</span>
-                                <span class="badge badge-primary">PHP</span>
-                                <span class="badge badge-primary">Node.js</span>
-                                <span class="badge badge-primary">Ruby</span>
-                                <span class="badge badge-primary">Paython</span>
+
+                            <a href="javascript:void(0)" class="card-link" style="color:grey;" id="comment{{ post.id }}"><i class="fa fa-comment"></i> {{ post.nbComment }} Comment</a>
+           
+                           
+                           <script>
+
+                                const csrftoken{{ post.id }} = '{{ csrf_token }}'
+                                
+                                document.getElementById('like{{ post.id }}').onclick = () => {
+                            
+                                    const requestObj = new XMLHttpRequest()
+                                    requestObj.onreadystatechange = function () {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            console.log(this.responseText)
+                                            if (this.responseText[0] == '1') {
+                                                document.getElementById('like{{ post.id }}').style.color = '#007bff';
+                                            } else {
+                                                document.getElementById('like{{ post.id }}').style.color = 'grey';
+                                            }
+                                            let likesCount = this.responseText.split("-")[1].trim(); // extract the second number after "-"
+                                            let pluralizeLikeWord = (likesCount == 1) ? " Like" : " Likes"; // pluralize the word "Like"
+                                            document.getElementById('like{{ post.id }}').innerHTML = '<i class="fa fa-thumbs-up"></i> '+ likesCount + pluralizeLikeWord; // update the number of likes
+                                        }
+                                    }
+                
+                                    requestObj.open("POST", "{% url 'like' %}")
+                                    requestObj.setRequestHeader("X-CSRFToken", csrftoken{{ post.id }})
+                    
+                                    const formdata = new FormData()
+                                    formdata.append('post_id', '{{ post.id }}')
+                                    requestObj.send(formdata)
+                                }
+
+
+                                document.getElementById('comment{{ post.id }}').onclick = () => {
+                                    if (document.getElementById('commentsSection{{ post.id }}').style.display == 'block') {
+                                        document.getElementById('commentsSection{{ post.id }}').style.display = 'none';
+                                        document.getElementById('commentTextArea{{ post.id }}').style.display = 'none';
+                                     document.getElementById('comment{{ post.id }}').style.color = 'grey';
+                                    }
+                                    else{
+                                    document.getElementById('commentsSection{{ post.id }}').style.display = 'block';
+                                    document.getElementById('commentTextArea{{ post.id }}').style.display = 'block';
+
+                                    document.getElementById('comment{{ post.id }}').style.color = '#007bff';
+                                }
+                                }
+                            </script>
+                        </div>
+                        <div class="card-footer" id="commentsSection{{post.id}}" style="display:none">
+                        {% for comment in comments %}
+                        {% if comment.post.id == post.id %}
+                        <div style="display:flex;">
+                            <div style="flex:1;">
+                                <div class="h7 text-muted" style="text-align:left;">
+                                    <i class="fa fa-reply" style="text-align:left;"></i> 
+                                    <img class="rounded-circle" width="20" src="{{ comment.auteur.profile.photo.url }}" alt="">
+                                    {{ comment.auteur }} 
+                                </div>  
+                            </div>
+                            <div style="flex:1;">
+                                <div class="h7 text-muted" style="text-align:right;">
+                                    <i class="fa fa-clock-o"></i> {{ comment.created| naturaltime }}
+                                </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        </div>
-                    </div>
-                    <!-- Post /////-->
-
-
-                    <!--- \\\\\\\Post-->
-                    <div class="card gedf-card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">@LeeCross</div>
-                                        <div class="h7 text-muted">Miracles Lee Cross</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <a class="dropdown-item" href="#">Save</a>
-                                            <a class="dropdown-item" href="#">Hide</a>
-                                            <a class="dropdown-item" href="#">Report</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card-body">
-                            <div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> Hace 40 min</div>
-                            <a class="card-link" href="#">
-                                <h5 class="card-title">Totam non adipisci hic! Possimus ducimus amet, dolores illo ipsum
-                                    quos
-                                    cum.</h5>
-                            </a>
-
+                        
                             <p class="card-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt fugit reprehenderit
-                                consectetur exercitationem odio,
-                                quam nobis? Officiis, similique, harum voluptate, facilis voluptas pariatur dolorum
-                                tempora sapiente
-                                eius maxime quaerat.
-                                <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU"
-                                   target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
+                                {{ comment.body|linebreaks }}
                             </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        </div>
-                    </div>
-                    <!-- Post /////-->
+                        {% endif %}
+                    {% endfor%}
+                </div>
 
+                <form action="{% url 'comment' %}" method="post">
+                        {% csrf_token %}
+                <div class="float-end mt-2 pt-1" id="commentTextArea{{ post.id }}" style="display:none;margin-top:10px;width: 100%;">
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <textarea class="form-control" name="text" rows="3" placeholder="Ecrire votre commentaire ici" style="width:90%;margin:auto" ></textarea>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin:10px">
+                      <i class="fa fa-send"></i> Publier le commentaire
+                    </button>
+                  </div>
+                </form>
+                </div>
+                <!-- Post /////-->
+            {% endfor %}
 
                 </div>
                 <div class="col-md-3">
@@ -363,15 +301,14 @@
                             <img src="{% static 'Photo_Laura.jpg' %}" style="height: 50%; width:50%">
                             <br/>
                             <br/>
-                            <a href="#" class="card-link">Accès aux photos</a>
-                            <a href="#" class="card-link"><i class="fa fa-google-drive"></i> Drive Photo</a>
+                            <a href="#" class="card-link"><i class="fa fa-images"></i> Accès aux photos</a>
                         </div>
                     </div>
                     <div class="card gedf-card">
                         <div class="card-body">
                             <h5 class="card-title">Drive</h5>
                             <h6 class="card-subtitle mb-2 text-muted">c'est la D les partiels </h6>
-                            <a href="#" class="card-link">{{ famille.drive }}</a>
+                            <a href="{{ famille.drive }}" class="card-link"><i class="fab fa-google-drive"></i> Lien du Drive</a>
                         </div>
                     </div>
                 </div>
@@ -380,9 +317,7 @@
 
     </div>
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-          crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

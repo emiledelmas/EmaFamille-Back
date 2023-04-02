@@ -34,6 +34,12 @@ urlpatterns = [
     path('ajout_rapide', views.ajout_rapide, name='ajout_rapide'),
     path('registerfamily/', views.register_family, name='registerfamily'),
     path('comment', views.comment, name='comment'),
+    path('searchfamille', views.searchfamille, name='searchfamille'),
+    path('addPendingFamilyRequest', views.add_pending_family_request, name='addPendingFamilyRequest'),
+    path('showPendingFamilyRequest', views.show_pending_family_request, name='showPendingFamilyRequest'),
+    path('editFamily', views.edit_family, name='editFamily'),
+    path('acceptPendingRequest', views.accept_pending_request, name='acceptPendingRequest'),
+    path('removeUserFromFamily/<int:user_id>', views.remove_user_from_family, name='removeUserFromFamily'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

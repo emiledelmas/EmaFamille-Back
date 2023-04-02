@@ -6,19 +6,22 @@ from django.utils import timezone
 
 class Famille(models.Model):
     nom=models.CharField(max_length=50)
-    logo=models.ImageField(upload_to='media/pp', null=True, blank=True)
+    logo=models.ImageField(upload_to='media/pp',blank=True,null=True)
     description=models.TextField()
-    drive=models.CharField(max_length=100)
+    drive=models.URLField(max_length=100,blank=True,null=True)
     chef=models.OneToOneField(User, on_delete=models.DO_NOTHING)
     GPA=models.FloatField(null=True, blank=True)
+    def __str__(self):
+        return self.nom
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='media/pp', default="media/pp/default.jpg")
     promo = models.IntegerField()
-    famille=models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='Profile', blank=True,null=True)
+    famille=models.ForeignKey(Famille, on_delete=models.DO_NOTHING, related_name='Profile', blank=True,null=True)
     amis = models.ManyToManyField(User, related_name='friends', blank=True)
+    description = models.TextField(max_length=360, blank=True, null=True)
     def __str__(self):
         return self.user.username
 
@@ -44,3 +47,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.auteur, self.post)
+    
+
+class PendingFamilyRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='pending_family_requests')
+    famille = models.ForeignKey(Famille, on_delete=models.DO_NOTHING, related_name='pending_family_requests')
+    date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return 'pending request from {} to {}'.format(self.user, self.famille)

@@ -46,7 +46,7 @@
         <!-- Card Group with img as a social network feed in one column -->
 
         <nav class="navbar navbar-light bg-white">
-            <a href="#" class="navbar-brand">EmaFamille</a>
+            <a href="/" class="navbar-brand titreProfile" style="font-size:25px">Ema Famille</a>
 
             <form class="form-inline" method="post" action="{% url 'search' %}">
                 {% csrf_token %}
@@ -67,16 +67,16 @@
         <div class="container-fluid gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card mt-10">
 
                         <div class="card-body">
                             {% if profile.photo %}
-                                <img class="rounded-circle" width="200" src="{{ profile.photo.url }}" alt="">
+                                <img class="rounded-circle" width="50%" height="50%" src="{{ profile.photo.url }}" alt="">
                             {% endif %}
                             <br>
                             <div class="h5">@{{ user.username }}</div>
                             <div class="h7 text-muted">{{ user.first_name }} {{ user.last_name }}</div>
-                            <div class="h7">Ceci est ma description</div>
+                            <div class="h7">{{ profile.description }}</div>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -90,8 +90,8 @@
                     <div class="col d-grip gap-2 align-items-start">
 
                         <div>
-                            <a href="profile/" class="btn btn-primary ">
-                                Accès Profil
+                            <a href="profile/" class="btn btn-primary " style="margin-bottom:20px">
+                                <i class="far fa-user-circle"></i> Accès Profil
                             </a>
                         </div>
                     </div>
@@ -106,12 +106,11 @@
                                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts"
-                                           role="tab" aria-controls="posts" aria-selected="true">Faire une
-                                            publication</a>
+                                           role="tab" aria-controls="posts" aria-selected="true"><i class="fas fa-feather-alt"></i> Faire une publication</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="images-tab" data-toggle="tab" role="tab"
-                                           aria-controls="images" aria-selected="false" href="#images">Images</a>
+                                           aria-controls="images" aria-selected="false" href="#images"><i class="fas fa-image"></i> Image</a>
                                     </li>
                                 </ul>
                             </div>
@@ -140,20 +139,9 @@
                                 </div>
                                 <div class="btn-toolbar justify-content-between">
                                     <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary">Publier</button>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Publier</button>
                                     </div>
-                                    <div class="btn-group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            <i class="fa fa-globe"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Famille</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Amis</a>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
 
                             </div>
@@ -172,16 +160,16 @@
                     {% endif %}
                     {% for post in Posts_Feed %}
                         <!--- \\\\\\\Post-->
-                        <div class="card gedf-card">
+                        <div class="card gedf-card" style="margin-top:20px">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" src="{{ post.auteur.profile.photo.url}}" alt="">
+                                            <img class="rounded-circle" width="45" height="45" src="{{ post.auteur.profile.photo.url}}" alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0">@{{ post.auteur }}</div>
-                                            <div class="h7 text-muted">{{ post.auteur }}</div>
+                                            <div class="h7 text-muted">{{ post.auteur.first_name }} {{ post.auteur.last_name }}</div>
                                         </div>
                                     </div>
                                     <div>
@@ -327,38 +315,38 @@
                     {% endfor %}
                     
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" style="margin-top:20px">
                     <div class="card gedf-card">
                         <div class="card-body">
                             <h5 class="card-title"> Ma Famille </h5>
-                            <h6 class="card-subtitle mb-2 text-muted"> {{ famille.name }} </h6>
+                            <h6 class="card-subtitle mb-2 text-muted"> {{ famille.nom }} </h6>
                             <p class="card-text">{{ famille.description }} </p>
                             <br/>
                             {% if famille.logo %}
-                                <img class="rounded-circle" width="200" src="{{ famille.logo.url }}" alt="">
+                                <img width="50%" height="50%" src="{{ famille.logo.url }}" alt="">
                             {% endif %}
                             <br/>
                             <br/>
-                            <a href="famille" class="card-link">Profil de famille</a>
-                            <a href="#" class="card-link"><i class="fa fa-google-drive"></i> Drive</a>
+                            <a href="famille" class="card-link"><i class="fa fa-users"></i> Ma Famille</a>
+                            <a {% if famille.drive %}href="{{famille.drive}}"{% else %}style="color:grey" {% endif %} target="_blank" class="card-link"><i class="fab fa-google-drive"></i> Drive</a>
                         </div>
                     </div>
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title">ajout rapide </h5>
                             <h6 class="card-subtitle mb-2 text-muted">ajoute ces BG </h6>
                             {% for profile in ajout %}
-                                <div class="card gedf-card">
+                                <div class="card gedf-card" style="margin-top:10px">
                                     <div class="card-body">
                                         {% if profile.photo %}
-                                        <img class="rounded-circle" width="50" src="{{ profile.photo.url }}" alt="">
+                                        <img width="25%" height="25%" class="rounded-circle" src="{{ profile.photo.url }}" alt="">
                                         {% endif %}
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
                                       <form action="{% url 'ajout_rapide' %}" method="post" id="ajout_rapide{{ profile.id }}">
                                 {% csrf_token %}
                                 <input type="hidden" name="user_id" value="{{ profile.user.id }}">
                                  <a href="javascript:void(0);" onclick="document.getElementById('ajout_rapide{{ profile.id }}').submit();"  class="btn btn-primary boutons">
-                                            Ajouter
+                                    <i class="fas fa-user-plus"></i> Ajouter
                                         </a>
                             </form>
 
@@ -372,9 +360,7 @@
         </div>
     </div>
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-          crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

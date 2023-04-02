@@ -1,16 +1,24 @@
 {% extends 'base.html' %}
 {% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="ConnexionCSS.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
     <main class="text-center w-50 m-auto">
 
-        <div style="text-align: center;">
+        <div class="col-md-12">
+            <br>
 
+            <div class="card">
+
+<div class="card-header">
             <h1 class="titreProfile">Modification du Profil</h1>
-            <p>{{ error }}</p>
-            <form method="post">
+</div>
+            <div class="card-body">
+            
+            <p>{{ error }}</p>  
+            <form method="post" enctype='multipart/form-data'>
                 {% csrf_token %}
             <label for="username" class="form-label">Nouvel identifiant</label>
             <div class="col d-grip gap-2 align-items-start">
@@ -45,24 +53,56 @@
                 <label for="promo" class="form-label">Ta promo</label>
                 <input type="text" class="form-control" id="promo" value="{{ profile.promo }}" name="promo" required>
                 <div class="invalid-feedback">
-                    pas valid
+                    pas valide
                 </div>
-                    <br><br><br>
-                    <button class="w-10 btn btn-lg btn-primary boutons" type="submit"
-                            style="margin-top: 5px; margin-bottom: 20px">Valider
-                    </button>
+                
 
             </div>
+
+  <div class="col-12">
+                <label for="promo" class="form-label">Ta description</label>
+                <textarea class="form-control" id="promo" name="description">{{ profile.description }}</textarea>
+                    <div class="invalid-feedback">
+                    pas valide
+                </div>
+
+
+            </div>
+                
+            
+  <div class="col-12">
+    <img src="{{ profile.photo.url }}" alt="image de profil" style="width: 100px; height: 100px; border-radius: 50%; margin-top: 20px; margin-bottom: 20px">
+    <p>Changer d'image de profil</p>
+
+            <div class="custom-file">
+                <label class="custom-file-label" for="customFile">Uploader
+                    l'image</label> 
+                <input type="file" class="custom-file-input" id="customFile" name="image">
+            <div class="py-4"></div>
+    </div>
+</div><div class="invalid-feedback">
+        pas valide
+    </div>
+        <br>
+        <button class="w-10 btn btn-lg boutons" type="submit" style="margin-top: 5px; margin-bottom: 20px">Valider</button>
+
+</div>
+
+
             </form>
 
 
-            <br>
-            <br>
-            <a href="/profile/">
-                <button class="w-100 btn btn-lg btn-primary boutons" type="submit"
-                        style="margin-top: 5px; margin-bottom: 20px">Retour
-                </button>
-            </a>
+           
         </div>
+        </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <a href="/profile/">
+        <button class="w-100 btn btn-lg boutons" type="submit"
+                style="margin-top: 5px; margin-bottom: 20px">Retour
+        </button>
+    </a>
     </main>
 {% endblock %}
