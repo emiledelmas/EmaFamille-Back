@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Profile, Post_Feed,Famille, Comment, PendingFamilyRequest
+from .models import Profile, Post_Feed,Famille, Comment, PendingFamilyRequest, PhotoFamille
 
 
 # Import forms
@@ -104,7 +104,9 @@ def profile_famille(request):
             profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")
             nb_membre=Profile.objects.filter(famille=profile.famille).count()
             posts = Post_Feed.objects.filter(auteur__in=Profile.objects.filter(famille=profile.famille).values('user')).order_by("-date")
-            return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre, 'posts': posts})
+            pic = PhotoFamille.objects.filter(famille=profile.famille).order_by("?").first()
+            comments = Comment.objects.all()
+            return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre, 'posts': posts, 'pic': pic, 'comments': comments})
     else: 
         return redirect('login')
 
@@ -279,10 +281,9 @@ def edit_family(request):
                 famille.nom = nom
                 famille.description = description
                 famille.chef = User.objects.get(id=chef_id)
+                famille.drive = drive
                 if logo:
                     famille.logo = logo
-                if drive:
-                    famille.drive = drive
                 famille.save()
                 return redirect('famille')
         else:
@@ -326,5 +327,32 @@ def remove_user_from_family(request, user_id):
             profile.famille = None
             profile.save()
         return redirect('famille')
+    else:
+        return redirect('home')
+    
+def album_famille(request):
+    if request.method == 'POST':
+        photo = request.FILES['photo']
+        profile = Profile.objects.get(user=request.user)
+        famille = profile.famille
+        photoFamille = PhotoFamille(photo=photo, famille=famille, user=request.user)
+        photoFamille.save()
+        return redirect('albumFamille')
+    else:
+        if request.user.is_authenticated:
+            famille = Famille.objects.get(chef=request.user)
+            photos = PhotoFamille.objects.filter(famille=famille).order_by('-date')
+            return render(request, 'albumFamille.html', {'famille': famille, 'photos': photos})
+        else:
+            return redirect('login')
+        
+def delete_post(request, post_id):
+    if request.method == 'POST':
+        post = Post_Feed.objects.get(id=post_id)
+        if post.auteur != request.user:
+            return redirect('home')
+        else:
+            post.delete()
+            return redirect('home')
     else:
         return redirect('home')

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-light bg-white">
+    <a href="/" class="navbar-brand titreProfile" style="font-size:25px">Ema Famille</a>
+    
+    {% if nb_membre %}
+    <div class="col d-grip gap-2 align-items-start">
+        <div>
+            <a href="/" class="btn btn-primary boutons">
+                <i class="fa fa-home"></i> Page Perso
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    <form class="form-inline" method="post" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="hidden" value="search" name="postType">
+        <div class="input-group">
+            <input type="text" class="form-control" aria-label="Recipient's username"
+                   aria-describedby="button-addon2" name="query">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</nav>

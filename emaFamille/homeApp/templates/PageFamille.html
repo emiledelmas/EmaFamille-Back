@@ -44,30 +44,7 @@
     <div class="text-center">
         <!-- Card Group with img as a social network feed in one column -->
 
-        <nav class="navbar navbar-light bg-white">
-             <a href="#" class="navbar-brand">EmaFamille</a>
-
-            <div class="col d-grip gap-2 align-items-start">
-
-                <div>
-                    <a href="/" class="btn btn-primary boutons">
-                        <i class="fa fa-home"></i> Page Perso
-                    </a>
-                </div>
-            </div>
-
-            <form class="form-inline">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Recipient's username"
-                           aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </nav>
+        {% include 'navbar.html'  %}
 
 
         <div class="container-fluid gedf-wrapper">
@@ -298,12 +275,13 @@
                             <h5 class="card-title"> Photos de miff </h5>
                             <h6 class="card-subtitle mb-2 text-muted"> Que du bonheur </h6>
                             <br/>
-                            <img src="{% static 'Photo_Laura.jpg' %}" style="height: 50%; width:50%">
+                            <img src="{{ pic.photo.url }}" style="height: 50%; width:50%">
                             <br/>
                             <br/>
-                            <a href="#" class="card-link"><i class="fa fa-images"></i> Accès aux photos</a>
+                            <a href="/albumFamille" class="card-link"><i class="fa fa-images"></i> Accès aux photos</a>
                         </div>
                     </div>
+                    {% if famille.drive %}
                     <div class="card gedf-card">
                         <div class="card-body">
                             <h5 class="card-title">Drive</h5>
@@ -311,6 +289,7 @@
                             <a href="{{ famille.drive }}" class="card-link"><i class="fab fa-google-drive"></i> Lien du Drive</a>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -40,6 +40,8 @@ urlpatterns = [
     path('editFamily', views.edit_family, name='editFamily'),
     path('acceptPendingRequest', views.accept_pending_request, name='acceptPendingRequest'),
     path('removeUserFromFamily/<int:user_id>', views.remove_user_from_family, name='removeUserFromFamily'),
+    path('albumFamille', views.album_famille, name='albumFamille'),
+    path('deletePost/<int:post_id>', views.delete_post, name='deletePost'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

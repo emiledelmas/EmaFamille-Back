@@ -38,7 +38,7 @@
                     Lien du drive
                     <span class="text-muted">(Optionel)</span>
                 </label>
-                <input type="text" class="form-control" id="drive" value="{{ famille.drive }}" name="drive">
+                <input type="text" class="form-control" id="drive" value="{% if famille.drive %}{{ famille.drive }}{% endif%}" name="drive">
                 <div class="invalid-feedback">
                     pas valide
                 </div>

@@ -9,7 +9,7 @@ class Famille(models.Model):
     logo=models.ImageField(upload_to='media/pp',blank=True,null=True)
     description=models.TextField()
     drive=models.URLField(max_length=100,blank=True,null=True)
-    chef=models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    chef=models.OneToOneField(User, on_delete=models.CASCADE)
     GPA=models.FloatField(null=True, blank=True)
     def __str__(self):
         return self.nom
@@ -27,7 +27,7 @@ class Profile(models.Model):
 
 
 class Post_Feed(models.Model):
-    auteur = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    auteur = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     texte = models.TextField(max_length=360)
     image = models.ImageField(upload_to='media/feed', null=True, blank=True)
@@ -38,8 +38,8 @@ class Post_Feed(models.Model):
         return self.comments.count()
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post_Feed, on_delete=models.DO_NOTHING, related_name='comments')
-    auteur = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    post = models.ForeignKey(Post_Feed, on_delete=models.CASCADE, related_name='comments')
+    auteur = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
@@ -50,8 +50,16 @@ class Comment(models.Model):
     
 
 class PendingFamilyRequest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='pending_family_requests')
-    famille = models.ForeignKey(Famille, on_delete=models.DO_NOTHING, related_name='pending_family_requests')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pending_family_requests')
+    famille = models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='pending_family_requests')
     date = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return 'pending request from {} to {}'.format(self.user, self.famille)
+    
+class PhotoFamille(models.Model):
+    famille = models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='photos')
+    photo = models.ImageField(upload_to='media/famille', null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='photos')
+    def __str__(self):
+        return 'photo of {} on {}'.format(self.famille, self.date)
