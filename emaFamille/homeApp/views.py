@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Profile, Post_Feed,Famille, Comment, PendingFamilyRequest, PhotoFamille
+from django.contrib.auth.decorators import login_required
 
 
 # Import forms
@@ -22,26 +23,26 @@ def home(request):
             return render(request, 'feed.html', {'error': 'Feed form is not valid'})
     else:
         if request.user.is_authenticated:
-            posts_feed = Post_Feed.objects.all().order_by("-date")
+            posts_feed = Post_Feed.objects.all().order_by("-date")[:100]
             profile = Profile.objects.get(user=request.user)
             ajout = Profile.objects.all().exclude(user=request.user).exclude(user__in=profile.amis.all()).order_by("?")[:2]
             famille = profile.famille
-            comments = Comment.objects.all()
+            # Only get the commment from the 100 last post
+            comments = Comment.objects.filter(post__in=posts_feed)
             return render(request, 'feed.html', {'user': request.user,'Posts_Feed':posts_feed,"profile":profile,'ajout': ajout, 'famille': famille,'comments':comments})
         else:
             return render(request, 'pageAccueil.html')
 
-
+@login_required
 def search(request):
     if request.method == 'POST':
         query = request.POST["query"]
         posts_feed = Post_Feed.objects.filter(texte__icontains=query).order_by("-date") if query else Post_Feed.objects.all().order_by("-date")
-        # Recherche des profils correspondant à l'utilisateur recherché
-        profiles = Profile.objects.filter(user__username__icontains=query) if query else Profile.objects.all()
+        seachedProfiles = Profile.objects.filter(user__username__icontains=query).exclude(user=request.user) | Profile.objects.filter(user__first_name__icontains=query).exclude(user=request.user) | Profile.objects.filter(user__last_name__icontains=query).exclude(user=request.user)
         profile = Profile.objects.get(user=request.user)
         ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
         famille = profile.famille
-        return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'profiles': profiles,"query":query,'ajout': ajout, 'famille': famille})
+        return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'seachedProfiles': seachedProfiles,"query":query,'ajout': ajout, 'famille': famille})
     else:
         return redirect('home')
 
@@ -59,9 +60,11 @@ def login_user(request):
             return render(request, 'PageConnexion.html', {'error': 'Username or password is incorrect'})
     return render(request, 'PageConnexion.html')
 
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('login')
+
 
 def register_user(request):
     if request.method == 'POST':
@@ -86,7 +89,7 @@ def register_user(request):
     else:
         return render(request, 'PageInscription.html')
     
-
+@login_required
 def profile(request):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
@@ -94,22 +97,21 @@ def profile(request):
     else:
         return redirect('login')
 
+@login_required
 def profile_famille(request):
-    if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        famille = profile.famille
-        if famille is None:
-            return redirect('registerfamily')
-        else:
-            profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")
-            nb_membre=Profile.objects.filter(famille=profile.famille).count()
-            posts = Post_Feed.objects.filter(auteur__in=Profile.objects.filter(famille=profile.famille).values('user')).order_by("-date")
-            pic = PhotoFamille.objects.filter(famille=profile.famille).order_by("?").first()
-            comments = Comment.objects.all()
-            return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre, 'posts': posts, 'pic': pic, 'comments': comments})
-    else: 
-        return redirect('login')
+    profile = Profile.objects.get(user=request.user)
+    famille = profile.famille
+    if famille is None:
+        return redirect('registerfamily')
+    else:
+        profiles = Profile.objects.filter(famille=profile.famille).exclude(user=request.user).order_by("?")
+        nb_membre=Profile.objects.filter(famille=profile.famille).count()
+        posts = Post_Feed.objects.filter(auteur__in=Profile.objects.filter(famille=profile.famille).values('user')).order_by("-date")
+        pic = PhotoFamille.objects.filter(famille=profile.famille).order_by("?").first()
+        comments = Comment.objects.all()
+        return render(request, 'PageFamille.html', {'user': request.user,'profile': profile, 'famille': famille, 'profiles': profiles, 'nb_membre': nb_membre, 'posts': posts, 'pic': pic, 'comments': comments})
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         editProfileForm = EditProfileForm(request.POST, request.FILES)
@@ -130,8 +132,7 @@ def edit_profile(request):
                 user.save()
                 profile = Profile.objects.get(user=user)
                 profile.promo = int(promo)
-                if description:
-                    profile.description = description
+                profile.description = description
                 if image:
                     profile.photo = image
                 profile.save()
@@ -140,16 +141,14 @@ def edit_profile(request):
             return render(request, 'PageModification.html', {'error': 'Edit profile form is not valid'})
 
     else:
-        if request.user.is_authenticated:
-            user = User.objects.get(username=request.user.username)
-            profile = Profile.objects.get(user=request.user)
-            return render(request, 'PageModification.html', {'user': user,'profile': profile})
-        else:
-            return redirect('login')
+        user = User.objects.get(username=request.user.username)
+        profile = Profile.objects.get(user=request.user)
+        return render(request, 'PageModification.html', {'user': user,'profile': profile})
 
 def presentation(request):
     return render(request,'PagePresentation.html')
 
+@login_required
 def like(request):
     if request.method == 'POST':
         post_id = request.POST['post_id']
@@ -166,6 +165,7 @@ def like(request):
     else:
         return redirect('home')
 
+@login_required
 def ajout_rapide(request):
     if request.method=='POST':
         user_id=request.POST['user_id']
@@ -175,6 +175,7 @@ def ajout_rapide(request):
         profile.amis.add(ami)
         return redirect('home')
 
+@login_required
 def register_family(request):
     if request.method == 'POST':
         registerForm = RegisterFamilyForm(request.POST, request.FILES)
@@ -208,6 +209,7 @@ def register_family(request):
             return render(request, 'PageCréationDeFamille.html', {'familles': familles, 'families_already_asked': families_already_asked})
     
 
+@login_required
 def comment(request):
     if request.method == 'POST':
         post_id = request.POST['post_id']
@@ -221,7 +223,7 @@ def comment(request):
         return redirect('home')
     
 
-
+@login_required
 def searchfamille(request):
     if request.method == 'POST':
         searchForm = SearchForm(request.POST)
@@ -232,6 +234,7 @@ def searchfamille(request):
         else:
             return render(request, 'PageCréationDeFamille.html', {'error': 'Search form is not valid'})
 
+@login_required
 def add_pending_family_request(request):
     if request.method == 'POST':
         user = request.user
@@ -249,20 +252,19 @@ def add_pending_family_request(request):
         return redirect('registerfamily')
         
 
+@login_required
 def show_pending_family_request(request):
-    if request.user.is_authenticated:
-        user = request.user
-        profile = Profile.objects.get(user=user)
-        famille = profile.famille
-        if profile.famille.chef == user:
-            pendingFamilyRequests = PendingFamilyRequest.objects.filter(famille=famille)
-            return render(request, 'PageDemandesDeFamille.html', {'pendingFamilyRequests': pendingFamilyRequests, 'famille': famille})
-        else:
-            return redirect('home') 
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    famille = profile.famille
+    if profile.famille.chef == user:
+        pendingFamilyRequests = PendingFamilyRequest.objects.filter(famille=famille)
+        return render(request, 'PageDemandesDeFamille.html', {'pendingFamilyRequests': pendingFamilyRequests, 'famille': famille})
     else:
-        return redirect('login')
+        return redirect('home') 
 
 
+@login_required
 def edit_family(request):
     if request.method == 'POST':
         editFamilyForm = EditFamilyForm(request.POST, request.FILES)
@@ -291,13 +293,11 @@ def edit_family(request):
             users = User.objects.filter(profile__famille=famille).exclude(id=request.user.id)
             return render(request, 'PageModificationFamille.html', {'famille': famille, 'users': users,'error': 'Edit family form is not valid' })
     else:
-        if request.user.is_authenticated:
-            famille = Famille.objects.get(chef=request.user)
-            users = User.objects.filter(profile__famille=famille).exclude(id=request.user.id)
-            return render(request, 'PageModificationFamille.html', {'famille': famille, 'users': users})
-        else:
-            return redirect('login')
-        
+        famille = Famille.objects.get(chef=request.user)
+        users = User.objects.filter(profile__famille=famille).exclude(id=request.user.id)
+        return render(request, 'PageModificationFamille.html', {'famille': famille, 'users': users})
+    
+@login_required
 def accept_pending_request(request):
     if request.method == 'POST':
         # if user is not the chef of the family, redirect to home
@@ -316,6 +316,7 @@ def accept_pending_request(request):
     else:
         return redirect('home')
     
+@login_required
 def remove_user_from_family(request, user_id):
     if request.method == 'POST':
         # if user is not the chef of the family, redirect to home
@@ -330,6 +331,7 @@ def remove_user_from_family(request, user_id):
     else:
         return redirect('home')
     
+@login_required
 def album_famille(request):
     if request.method == 'POST':
         photo = request.FILES['photo']
@@ -339,13 +341,11 @@ def album_famille(request):
         photoFamille.save()
         return redirect('albumFamille')
     else:
-        if request.user.is_authenticated:
-            famille = Famille.objects.get(chef=request.user)
-            photos = PhotoFamille.objects.filter(famille=famille).order_by('-date')
-            return render(request, 'albumFamille.html', {'famille': famille, 'photos': photos})
-        else:
-            return redirect('login')
-        
+        famille = Famille.objects.get(chef=request.user)
+        photos = PhotoFamille.objects.filter(famille=famille).order_by('-date')
+        return render(request, 'albumFamille.html', {'famille': famille, 'photos': photos})
+
+@login_required
 def delete_post(request, post_id):
     if request.method == 'POST':
         post = Post_Feed.objects.get(id=post_id)
@@ -356,3 +356,33 @@ def delete_post(request, post_id):
             return redirect('home')
     else:
         return redirect('home')
+
+@login_required 
+def supprimer_amis(request, user_id):
+    if request.method == 'POST':
+        user = User.objects.get(id=user_id)
+        profile = Profile.objects.get(user=request.user)
+        profile.amis.remove(user)
+        profile.save()
+    return redirect('home')
+
+@login_required
+def supprimer_famille(request):
+    if request.method == 'POST':
+        if request.user.profile.famille.chef != request.user:
+            return redirect('famille')
+        else:
+            famille = Famille.objects.get(chef=request.user)
+            famille.delete()
+    return redirect('home')
+
+@login_required
+def quitter_famille(request):
+    if request.method == 'POST':
+        if request.user.profile.famille.chef == request.user:
+            return redirect('famille')
+        else:
+            profile = Profile.objects.get(user=request.user)
+            profile.famille = None
+            profile.save()
+    return redirect('home')

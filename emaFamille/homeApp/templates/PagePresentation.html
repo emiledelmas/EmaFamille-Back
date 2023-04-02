@@ -2,18 +2,28 @@
 {% load static %}
 
 {% block content %}
+<main class="text-center m-auto" style="width:90%">
 
     <div style="text-align: center;">
         <img src="{% static 'Logo_EMAFamille.PNG' %}" width="256">
-        <br>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
         <h1 class="titreProfile">Présentation</h1>
-        <p style="text-align: center;width:40%;margin:auto">EMA Famille est un site internet conçu par Laura BertiEaux,
-            Charlotte Houzé, Emile Delmas,
-            Arthur Rubio, Florian Laporte, Simon Chalmé, Ilyane Gomis et Ludovic Terrasson, afin de facilter et de
-            favoriser
-            le système de parainage au sein de l'école des Mines d'Alès. Il permet aux différentes familles
-            de poster des annonces visibles par tous via le forum mais également de disposer d"une page sur
-            laquelle elles peuvent se présenter et partager des photos.</p>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-10 col-lg-4">
+                  <p class="text-center">
+                    EMA Famille est un site internet conçu par Laura BertiEaux, Charlotte Houzé, Emile Delmas,
+                    Arthur Rubio, Florian Laporte, Simon Chalmé, Ilyane Gomis et Ludovic Terrasson, afin de faciliter et de
+                    favoriser le système de parrainage au sein de l'école des Mines d'Alès. Il permet aux différentes familles
+                    de poster des annonces visibles par tous via le forum mais également de disposer d'une page sur
+                    laquelle elles peuvent se présenter et partager des photos.
+                  </p>
+                </div>
+              </div>
+              
         <br>
         <img src="{% static 'Photo_Laura.jpg' %}" width="128" class="rounded-circle">
         <img src="{% static 'Photo_Ludo 2.jpg' %}" width="128" class="rounded-circle">
@@ -28,6 +38,10 @@
         <a href="/">
             <button class="w-20 btn btn-primary boutons" style="margin-bottom: 10px">Retour</button>
         </a>
+    </div>
+</div>
+</div>
 
     </div>
+</main>
 {% endblock %}

@@ -17,7 +17,13 @@
     <div class="container">
         <main class="form-signin w-100 m-auto">
             <img class="mb-4" src="{% static 'Logo_EMAFamille.PNG' %}" alt="" width="72" height="72">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
             <h1 class="titreProfile">Inscription</h1>
+            </div>
+        <div class="card-body">
+
             <p>{{ error }} </p>
             <p>Veuillez renseigner les champs suivants :</p>
 
@@ -81,9 +87,16 @@
                                     <input type="email" class="form-control" id="email" name="email"
                                            placeholder="you@example.com">
                                     <div class="invalid-feedback">
-                                        Please enter a valid email address for shipping updates.
+                                        Please enter a valid email address
                                     </div>
                                 </div>
+
+                                <div class="col-12">
+                                    <input type="checkbox"  id="cguAccept" name="cguAccept" placeholder="" required>
+                                    <label for="cguAccept" class="form-label">J'accepte l'utilisation de mes donnnées pour le bon fonctionnement du site (<b>sans revente</b> et dans le respect de <b>la loi RGPD</b>)</label>
+                                   
+                                </div>
+
 
                             </div>
                     </div>
@@ -97,6 +110,10 @@
                 <button class="w-100 btn btn-lg btn-primary boutons" type="submit" style="margin-top: 10px">Retour
                 </button>
             </a>
+    </div>
+</div>
+</div>
+
         </main>
     </div>
 {% endblock %}

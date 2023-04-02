@@ -2,45 +2,43 @@
 {% load static %}
 
 {% block content %}
-    <div class="text-center">
-        <img src="{% static 'Logo_EMAFamille.PNG' %}" width="512">
-        <br>
+<div class="text-center">
+    <img src="{% static 'Logo_EMAFamille.PNG' %}" width="30%">
+    <br>
+    <div class="card m-auto" style="width:90%">
+    <div class="card-header">
         <h1 class="titreProfile">Bienvenue</h1>
-        <p> Parce que la famille, c'est la Famille</p>
+    </div>
 
-        <div class="container">
-            <div class="row g-4 py-5 row-cols-3 row-cols-lg-6">
-                <div class="col d-grip gap-2 align-items-start">
-                </div>
-                <div class="col d-grip gap-2 align-items-start">
-                </div>
-                <div class="col d-grip gap-2 align-items-start">
-                    <div>
+        <div class="card-body">
+            <h5 class="text-muted"> Parce que la famille, c'est la Famille <i class="fas fa-heart"></i></h5>
+      
+
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
                         <a href="login/" class="btn btn-primary boutons">
-                            Me connecter
+                            <i class="fas fa-sign-in-alt"></i> Me connecter
                         </a>
                     </div>
-                </div>
-
-                <div class="col d-grip gap-2 align-items-start">
-                    <div>
+                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
                         <a href="register/" class="btn btn-primary boutons">
-                            M'inscrire
+                            <i class="fas fa-user-plus"></i> M'inscrire
+                        </a>
+                    </div>
+                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
+                        <a href="presentation" class="btn btn-primary boutons">
+                            <i class="fas fa-info-circle"></i> En savoir plus sur EMA Famille
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div>
-            <a href="presentation" class="btn btn-primary boutons">
-                En savoir plus sur EMA Famille
-            </a>
-        </div>
-        <br>
-        <br>
-
-
     </div>
-
+</div>
+</div>
+</div>
+<script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
 {% endblock %}

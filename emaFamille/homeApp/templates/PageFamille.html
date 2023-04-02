@@ -68,13 +68,22 @@
                                 <div class="h5">{{ nb_membre }}</div>
                             </li>
                         </ul>
+                        {% if user != famille.chef %}
+                        <form action="{% url 'quitterFamille' %}" method="post" onsubmit="return confirm('Voulez-vous vraiment quitter la famille?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="margin:10px">
+                                <i class="fa fa-ban"></i>
+                                Quitter la famille
+                            </button>
+                        </form>
+                        {% endif %}
 
                     </div>
                     <br>
                     <div class="col d-grip gap-2 align-items-start">
 
                     </div>
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title"> Chef de famille </h5>
                                 <div class="card gedf-card">
@@ -93,12 +102,21 @@
                                     <i class="fa fa-inbox"></i>
                                     Voir les demandes
                                 </a>
+                                <br>
+                                <br>
+                                <form action="{% url 'supprimerFamille' %}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer la famille?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                        Supprimer la famille
+                                    </button>
+                                </form>
                             {% endif %}
 
 
                         </div>
                     </div>
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title"> Membres </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Guette ces gueules </h6>
@@ -129,7 +147,7 @@
 
                     {% for post in posts %}
                     <!--- \\\\\\\Post-->
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -270,19 +288,23 @@
 
                 </div>
                 <div class="col-md-3">
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title"> Photos de miff </h5>
                             <h6 class="card-subtitle mb-2 text-muted"> Que du bonheur </h6>
                             <br/>
+                            {% if pic %}
                             <img src="{{ pic.photo.url }}" style="height: 50%; width:50%">
+                            {% else %}
+                            <P> Aucune photo postée :(</P>
+                            {% endif %}
                             <br/>
                             <br/>
                             <a href="/albumFamille" class="card-link"><i class="fa fa-images"></i> Accès aux photos</a>
                         </div>
                     </div>
                     {% if famille.drive %}
-                    <div class="card gedf-card">
+                    <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title">Drive</h5>
                             <h6 class="card-subtitle mb-2 text-muted">c'est la D les partiels </h6>

@@ -19,7 +19,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='media/pp', default="media/pp/default.jpg")
     promo = models.IntegerField()
-    famille=models.ForeignKey(Famille, on_delete=models.DO_NOTHING, related_name='Profile', blank=True,null=True)
+    famille=models.ForeignKey(Famille, on_delete=models.SET_NULL, related_name='Profile', blank=True,null=True)
     amis = models.ManyToManyField(User, related_name='friends', blank=True)
     description = models.TextField(max_length=360, blank=True, null=True)
     def __str__(self):

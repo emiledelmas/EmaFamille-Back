@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <br><br>
-<main class="text-center m-auto" style="width:60%">
+<main class="text-center m-auto" style="width:70%">
         <div class="col-md-12">
             <div class="card">
 
@@ -24,12 +24,15 @@
         <p>Prénom : {{ user.first_name }}</p>
 
         <p>Promo: {{ profile.promo }}</p>
+        {% if profile.description %}
         <p>Description: {{ profile.description }}</p>
+        {% endif %}
+        <br>
         <div class="container">
-            <div class="row g-4 py-5 row-cols-3 row-cols-lg-5">
-                <div class="col d-grip gap-2 align-items-start">
+            <div class="row g-4 row-cols-lg-5 row-cols-sm-1 row-cols-xs-1">
+                <div class="d-grip gap-2 align-items-start">
                 </div>
-                <div class="col d-grip gap-2 align-items-start">
+                <div class="d-grip gap-2 align-items-start">
                     <div>
 
 
@@ -39,7 +42,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col d-grip gap-2 align-items-start">
+                <div class="d-grip gap-2 align-items-start">
 
                     <div>
                         <a href="/" class="btn btn-primary boutons">
@@ -48,7 +51,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col d-grip gap-2 align-items-start">
+                <div class="d-grip gap-2 align-items-start">
                     <div>
                         <a href="/logout/" class="btn btn-primary boutons">
                             <i class="fas fa-sign-out-alt"></i>
@@ -56,10 +59,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="col d-grip gap-2 align-items-start">
+                <div class="d-grip gap-2 align-items-start">
                 </div>
             </div>
         </div>
+        <br>
+        <p>Dans le cadre du respect de la <a href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on">loi Européenne RGPD</a>, <br> vous pouvez demander à avoir une copie ou supprimer vos données <a href="mailto:contact@emafamille.fr">contact@emafamille.fr</a> </p>
     </div>
 </div>
 </div>

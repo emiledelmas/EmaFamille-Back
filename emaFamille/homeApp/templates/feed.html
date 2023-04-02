@@ -60,7 +60,9 @@
                             <br>
                             <div class="h5">@{{ user.username }}</div>
                             <div class="h7 text-muted">{{ user.first_name }} {{ user.last_name }}</div>
+                            {% if profile.description %}
                             <div class="h7">{{ profile.description }}</div>
+                            {% endif %}
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
@@ -142,6 +144,35 @@
                             </p>
                         </div>
                     {% endif %}
+                    {% if seachedProfiles %}
+                    {% for p in seachedProfiles %}
+                    <div class="card gedf-card" style="margin-top:10px">
+                        <div class="card-body">
+                            {% if p.photo %}
+                            <img width="10%" height="10%" class="rounded-circle" src="{{ p.photo.url }}" alt="">
+                            {% endif %}
+                            <p class="card-text h5">@{{ p.user.username }}</p>
+                        {% if p.user not in profile.amis.all %}
+                          <form action="{% url 'ajout_rapide' %}" method="post" id="ajout_rapide{{ p.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{ p.user.id }}">
+                     <a href="javascript:void(0);" onclick="document.getElementById('ajout_rapide{{ p.id }}').submit();"  class="btn btn-primary boutons">
+                        <i class="fas fa-user-plus"></i> Ajouter
+                            </a>
+                </form>
+                {% else %}
+                <form action="{% url 'supprimerAmis' p.user.id  %}" method="post" id="supprimer_amis{{ p.id }}">
+                    {% csrf_token %}
+                        <a href="javascript:void(0);" onclick="document.getElementById('supprimer_amis{{ p.id }}').submit();"  class="btn btn-danger boutons">
+                        <i class="fas fa-user-minus"></i> Supprimer
+                            </a>
+                </form>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endif %}
                     {% for post in Posts_Feed %}
                         <!--- \\\\\\\Post-->
                         <div class="card gedf-card" style="margin-top:20px">
@@ -309,6 +340,7 @@
                 <div class="col-md-3" style="margin-top:20px">
                     <div class="card gedf-card">
                         <div class="card-body">
+                            {% if famille %}
                             <h5 class="card-title"> Ma Famille </h5>
                             <h6 class="card-subtitle mb-2 text-muted"> {{ famille.nom }} </h6>
                             <p class="card-text">{{ famille.description }} </p>
@@ -320,6 +352,10 @@
                             <br/>
                             <a href="famille" class="card-link"><i class="fa fa-users"></i> Ma Famille</a>
                             <a {% if famille.drive %}href="{{famille.drive}}"{% else %}style="color:grey" {% endif %} target="_blank" class="card-link"><i class="fab fa-google-drive"></i> Drive</a>
+                            {% else %}
+                            <h5 class="card-title">Pas de Famille</h5>
+                            <a href="famille" class="card-link"><i class="fa fa-users"></i> Rejoindre/Crée une famille</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="card gedf-card" style="margin-top:20px">
