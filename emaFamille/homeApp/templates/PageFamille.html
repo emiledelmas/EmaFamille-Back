@@ -44,7 +44,7 @@
     <div class="text-center">
         <!-- Card Group with img as a social network feed in one column -->
 
-        {% include 'navbar.html'  %}
+        {% include 'navbar.html' %}
 
 
         <div class="container-fluid gedf-wrapper">
@@ -69,13 +69,14 @@
                             </li>
                         </ul>
                         {% if user != famille.chef %}
-                        <form action="{% url 'quitterFamille' %}" method="post" onsubmit="return confirm('Voulez-vous vraiment quitter la famille?');">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger" style="margin:10px">
-                                <i class="fa fa-ban"></i>
-                                Quitter la famille
-                            </button>
-                        </form>
+                            <form action="{% url 'quitterFamille' %}" method="post"
+                                  onsubmit="return confirm('Voulez-vous vraiment quitter la famille?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" style="margin:10px">
+                                    <i class="fa fa-ban"></i>
+                                    Quitter la famille
+                                </button>
+                            </form>
                         {% endif %}
 
                     </div>
@@ -86,25 +87,27 @@
                     <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
                             <h5 class="card-title"> Chef de famille </h5>
-                                <div class="card gedf-card">
-                                    <div class="card-body">
-                                        <img class="rounded-circle" width="50" height="50" src="{{ famille.chef.profile.photo.url }}" alt="">
-                                        <p class="card-text h5">@{{ famille.chef.username }}</p>
-                                        <p class="card-text h7">{{ famille.chef.first_name }} {{ famille.chef.last_name }}</p>
-                                    </div>
+                            <div class="card gedf-card">
+                                <div class="card-body">
+                                    <img class="rounded-circle" width="50" height="50"
+                                         src="{{ famille.chef.profile.photo.url }}" alt="">
+                                    <p class="card-text h5">@{{ famille.chef.username }}</p>
+                                    <p class="card-text h7">{{ famille.chef.first_name }} {{ famille.chef.last_name }}</p>
                                 </div>
+                            </div>
                             {% if user == famille.chef %}
-                                <a href="{% url 'editFamily'%}" class="btn boutons">
-                                <i class="fa fa-edit"></i>
+                                <a href="{% url 'editFamily' %}" class="btn boutons">
+                                    <i class="fa fa-edit"></i>
                                     Modifier la famille
                                 </a>
-                                <a href="{% url 'showPendingFamilyRequest'%}" class="btn boutons">
+                                <a href="{% url 'showPendingFamilyRequest' %}" class="btn boutons">
                                     <i class="fa fa-inbox"></i>
                                     Voir les demandes
                                 </a>
                                 <br>
                                 <br>
-                                <form action="{% url 'supprimerFamille' %}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer la famille?');">
+                                <form action="{% url 'supprimerFamille' %}" method="post"
+                                      onsubmit="return confirm('Voulez-vous vraiment supprimer la famille?');">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
@@ -123,19 +126,24 @@
                             {% for profile in profiles %}
                                 <div class="card gedf-card">
                                     <div class="card-body">
-                                    {% if profile.photo %}
-                                        <img class="rounded-circle" width="50" height="50" src="{{ profile.photo.url }}" alt="">
-                                    {% endif %}
+                                        {% if profile.photo %}
+                                            <img class="rounded-circle" width="50" height="50"
+                                                 src="{{ profile.photo.url }}" alt="">
+                                        {% endif %}
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
-
+                                        <div class="h7 text-muted">{{ profile.user.first_name }} {{ profile.user.last_name }}</div>
+                                        {% if profile.description %}
+                                            <div class="h7">{{ profile.description }}</div>
+                                        {% endif %}
                                         {% if user == famille.chef %}
-                                        <form action="{% url 'removeUserFromFamily' profile.user.id %}" method="post">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-ban"></i>
-                                                Exclure de la famille
-                                            </button>
-                                        </form>
+                                            <form action="{% url 'removeUserFromFamily' profile.user.id %}"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-ban"></i>
+                                                    Exclure de la famille
+                                                </button>
+                                            </form>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -148,145 +156,150 @@
                 <div class="col-md-6 gedf-main">
 
                     {% for post in posts %}
-                    <!--- \\\\\\\Post-->
-                    <div class="card gedf-card" style="margin-top:20px">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
+                        <!--- \\\\\\\Post-->
+                        <div class="card gedf-card" style="margin-top:20px">
+                            <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" height="45" src="{{ post.auteur.profile.photo.url}}" alt="">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" height="45"
+                                                 src="{{ post.auteur.profile.photo.url }}" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">@{{ post.auteur }}</div>
+                                            <div class="h7 text-muted">{{ post.auteur.first_name }} {{ post.auteur.last_name }}</div>
+                                        </div>
                                     </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">@{{ post.auteur }}</div>
-                                        <div class="h7 text-muted">{{ post.auteur.first_name }} {{ post.auteur.last_name }}</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Avancé</div>
-                                            <a class="dropdown-item" href="#">Supprimer</a>
+                                    <div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link dropdown-toggle" type="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                                <div class="h6 dropdown-header">Avancé</div>
+                                                <a class="dropdown-item" href="#">Supprimer</a>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+                            <div class="card-body">
+                                {% if post.image %}
+                                    <img src="{{ post.image.url }}" class="img-fluid" alt="image desc">
+                                {% endif %}
+                                <div class="text-muted h7 mb-2 align-items-center"><i
+                                        class="fa fa-clock-o"></i> {{ post.date| naturaltime }} </div>
+                                <a class="card-link" href="#">
+                                    <h5 class="card-title text-dark"></h5>
+                                </a>
 
-                        </div>
-                        <div class="card-body">
-                            {% if post.image %}
-                                <img src="{{ post.image.url }}" class="img-fluid" alt="image desc">
-                            {% endif %}
-                            <div class="text-muted h7 mb-2 align-items-center"><i
-                                    class="fa fa-clock-o"></i> {{ post.date| naturaltime }} </div>
-                            <a class="card-link" href="#">
-                                <h5 class="card-title text-dark"></h5>
-                            </a>
-
-                            <p class="card-text">
-                                {{ post.texte|linebreaks }}
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                
+                                <p class="card-text">
+                                    {{ post.texte|linebreaks }}
+                                </p>
+                            </div>
+                            <div class="card-footer">
 
 
-                        <a href="javascript:void(0)" class="card-link" id="like{{ post.id }}" {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
-                                <i class="fa fa-thumbs-up"></i> 
-                                {{ post.likes.count }} Like{{ post.likes.count|pluralize }}                
-                            </a>
+                                <a href="javascript:void(0)" class="card-link" id="like{{ post.id }}"
+                                   {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
+                                    <i class="fa fa-thumbs-up"></i>
+                                    {{ post.likes.count }} Like{{ post.likes.count|pluralize }}
+                                </a>
 
 
-                            <a href="javascript:void(0)" class="card-link" style="color:grey;" id="comment{{ post.id }}"><i class="fa fa-comment"></i> {{ post.nbComment }} Comment</a>
-           
-                           
-                           <script>
+                                <a href="javascript:void(0)" class="card-link" style="color:grey;"
+                                   id="comment{{ post.id }}"><i class="fa fa-comment"></i> {{ post.nbComment }} Comment</a>
 
-                                const csrftoken{{ post.id }} = '{{ csrf_token }}'
-                                
-                                document.getElementById('like{{ post.id }}').onclick = () => {
-                            
-                                    const requestObj = new XMLHttpRequest()
-                                    requestObj.onreadystatechange = function () {
-                                        if (this.readyState == 4 && this.status == 200) {
-                                            console.log(this.responseText)
-                                            if (this.responseText[0] == '1') {
-                                                document.getElementById('like{{ post.id }}').style.color = '#007bff';
-                                            } else {
-                                                document.getElementById('like{{ post.id }}').style.color = 'grey';
+
+                                <script>
+
+                                    const csrftoken{{ post.id }} = '{{ csrf_token }}'
+
+                                    document.getElementById('like{{ post.id }}').onclick = () => {
+
+                                        const requestObj = new XMLHttpRequest()
+                                        requestObj.onreadystatechange = function () {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                console.log(this.responseText)
+                                                if (this.responseText[0] == '1') {
+                                                    document.getElementById('like{{ post.id }}').style.color = '#007bff';
+                                                } else {
+                                                    document.getElementById('like{{ post.id }}').style.color = 'grey';
+                                                }
+                                                let likesCount = this.responseText.split("-")[1].trim(); // extract the second number after "-"
+                                                let pluralizeLikeWord = (likesCount == 1) ? " Like" : " Likes"; // pluralize the word "Like"
+                                                document.getElementById('like{{ post.id }}').innerHTML = '<i class="fa fa-thumbs-up"></i> ' + likesCount + pluralizeLikeWord; // update the number of likes
                                             }
-                                            let likesCount = this.responseText.split("-")[1].trim(); // extract the second number after "-"
-                                            let pluralizeLikeWord = (likesCount == 1) ? " Like" : " Likes"; // pluralize the word "Like"
-                                            document.getElementById('like{{ post.id }}').innerHTML = '<i class="fa fa-thumbs-up"></i> '+ likesCount + pluralizeLikeWord; // update the number of likes
+                                        }
+
+                                        requestObj.open("POST", "{% url 'like' %}")
+                                        requestObj.setRequestHeader("X-CSRFToken", csrftoken{{ post.id }})
+
+                                        const formdata = new FormData()
+                                        formdata.append('post_id', '{{ post.id }}')
+                                        requestObj.send(formdata)
+                                    }
+
+
+                                    document.getElementById('comment{{ post.id }}').onclick = () => {
+                                        if (document.getElementById('commentsSection{{ post.id }}').style.display == 'block') {
+                                            document.getElementById('commentsSection{{ post.id }}').style.display = 'none';
+                                            document.getElementById('commentTextArea{{ post.id }}').style.display = 'none';
+                                            document.getElementById('comment{{ post.id }}').style.color = 'grey';
+                                        } else {
+                                            document.getElementById('commentsSection{{ post.id }}').style.display = 'block';
+                                            document.getElementById('commentTextArea{{ post.id }}').style.display = 'block';
+
+                                            document.getElementById('comment{{ post.id }}').style.color = '#007bff';
                                         }
                                     }
-                
-                                    requestObj.open("POST", "{% url 'like' %}")
-                                    requestObj.setRequestHeader("X-CSRFToken", csrftoken{{ post.id }})
-                    
-                                    const formdata = new FormData()
-                                    formdata.append('post_id', '{{ post.id }}')
-                                    requestObj.send(formdata)
-                                }
-
-
-                                document.getElementById('comment{{ post.id }}').onclick = () => {
-                                    if (document.getElementById('commentsSection{{ post.id }}').style.display == 'block') {
-                                        document.getElementById('commentsSection{{ post.id }}').style.display = 'none';
-                                        document.getElementById('commentTextArea{{ post.id }}').style.display = 'none';
-                                     document.getElementById('comment{{ post.id }}').style.color = 'grey';
-                                    }
-                                    else{
-                                    document.getElementById('commentsSection{{ post.id }}').style.display = 'block';
-                                    document.getElementById('commentTextArea{{ post.id }}').style.display = 'block';
-
-                                    document.getElementById('comment{{ post.id }}').style.color = '#007bff';
-                                }
-                                }
-                            </script>
-                        </div>
-                        <div class="card-footer" id="commentsSection{{post.id}}" style="display:none">
-                        {% for comment in comments %}
-                        {% if comment.post.id == post.id %}
-                        <div style="display:flex;">
-                            <div style="flex:1;">
-                                <div class="h7 text-muted" style="text-align:left;">
-                                    <i class="fa fa-reply" style="text-align:left;"></i> 
-                                    <img class="rounded-circle" width="20" src="{{ comment.auteur.profile.photo.url }}" alt="">
-                                    {{ comment.auteur }} 
-                                </div>  
+                                </script>
                             </div>
-                            <div style="flex:1;">
-                                <div class="h7 text-muted" style="text-align:right;">
-                                    <i class="fa fa-clock-o"></i> {{ comment.created| naturaltime }}
+                            <div class="card-footer" id="commentsSection{{ post.id }}" style="display:none">
+                                {% for comment in comments %}
+                                    {% if comment.post.id == post.id %}
+                                        <div style="display:flex;">
+                                            <div style="flex:1;">
+                                                <div class="h7 text-muted" style="text-align:left;">
+                                                    <i class="fa fa-reply" style="text-align:left;"></i>
+                                                    <img class="rounded-circle" width="20"
+                                                         src="{{ comment.auteur.profile.photo.url }}" alt="">
+                                                    {{ comment.auteur }}
+                                                </div>
+                                            </div>
+                                            <div style="flex:1;">
+                                                <div class="h7 text-muted" style="text-align:right;">
+                                                    <i class="fa fa-clock-o"></i> {{ comment.created| naturaltime }}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="card-text">
+                                            {{ comment.body|linebreaks }}
+                                        </p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <form action="{% url 'comment' %}" method="post">
+                                {% csrf_token %}
+                                <div class="float-end mt-2 pt-1" id="commentTextArea{{ post.id }}"
+                                     style="display:none;margin-top:10px;width: 100%;">
+                                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                                    <textarea class="form-control" name="text" rows="3"
+                                              placeholder="Ecrire votre commentaire ici"
+                                              style="width:90%;margin:auto"></textarea>
+                                    <button type="submit" class="btn btn-primary btn-sm" style="margin:10px">
+                                        <i class="fa fa-send"></i> Publier le commentaire
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        
-                            <p class="card-text">
-                                {{ comment.body|linebreaks }}
-                            </p>
-                        {% endif %}
-                    {% endfor%}
-                </div>
-
-                <form action="{% url 'comment' %}" method="post">
-                        {% csrf_token %}
-                <div class="float-end mt-2 pt-1" id="commentTextArea{{ post.id }}" style="display:none;margin-top:10px;width: 100%;">
-                <input type="hidden" name="post_id" value="{{ post.id }}">
-                    <textarea class="form-control" name="text" rows="3" placeholder="Ecrire votre commentaire ici" style="width:90%;margin:auto" ></textarea>
-                    <button type="submit" class="btn btn-primary btn-sm" style="margin:10px">
-                      <i class="fa fa-send"></i> Publier le commentaire
-                    </button>
-                  </div>
-                </form>
-                </div>
-                <!-- Post /////-->
-            {% endfor %}
+                        <!-- Post /////-->
+                    {% endfor %}
 
                 </div>
                 <div class="col-md-3">
@@ -296,9 +309,9 @@
                             <h6 class="card-subtitle mb-2 text-muted"> Que du bonheur </h6>
                             <br/>
                             {% if pic %}
-                            <img src="{{ pic.photo.url }}" style="height: 50%; width:50%">
+                                <img src="{{ pic.photo.url }}" style="height: 50%; width:50%">
                             {% else %}
-                            <P> Aucune photo postée :(</P>
+                                <P> Aucune photo postée :(</P>
                             {% endif %}
                             <br/>
                             <br/>
@@ -306,13 +319,14 @@
                         </div>
                     </div>
                     {% if famille.drive %}
-                    <div class="card gedf-card" style="margin-top:20px">
-                        <div class="card-body">
-                            <h5 class="card-title">Drive</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">c'est la D les partiels </h6>
-                            <a href="{{ famille.drive }}" class="card-link"><i class="fab fa-google-drive"></i> Lien du Drive</a>
+                        <div class="card gedf-card" style="margin-top:20px">
+                            <div class="card-body">
+                                <h5 class="card-title">Drive</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">c'est la D les partiels </h6>
+                                <a href="{{ famille.drive }}" class="card-link"><i class="fab fa-google-drive"></i> Lien
+                                    du Drive</a>
+                            </div>
                         </div>
-                    </div>
                     {% endif %}
                 </div>
             </div>
