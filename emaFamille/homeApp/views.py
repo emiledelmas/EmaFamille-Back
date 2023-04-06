@@ -396,3 +396,12 @@ def quitter_famille(request):
             profile.famille = None
             profile.save()
     return redirect('home')
+
+def searchfriend(request):
+    # Recherche des profils correspondant à l'utilisateur recherché
+    profile = Profile.objects.get(user=request.user)
+    seachedProfiles = Profile.objects.filter(user__in=profile.amis.all())
+    ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+    famille = profile.famille
+    return render(request, 'feed.html', {'user': request.user, "profile": profile, 'seachedProfiles': seachedProfiles,'ajout': ajout, 'famille': famille})
+
