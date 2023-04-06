@@ -86,7 +86,16 @@ opacity: 1;
 
     <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
     <p class="text-muted" id=""><i class="fa fa-clock-o"></i> {{ photo.date|naturaltime }} par <b>@{{ photo.user.username }}</b></p>
-      
+      {% if user == photo.user %}
+            <form action="{% url 'supprimerPhoto' photo.id %}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer la photo?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                        Supprimer la photo
+                                    </button>
+                                </form>
+
+      {% endif %}
       <img class="d-block w-100" src="{{ photo.photo.url }}" alt="a slide">
     </div>
     {% endfor %}

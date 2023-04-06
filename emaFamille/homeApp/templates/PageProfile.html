@@ -17,7 +17,7 @@
         <br>
         <br>
 
-
+{% if profil.photo %}
         <p>Identifiant : {{ user.username }}</p>
         <p>Nom : {{ user.last_name }}</p>
 
@@ -34,6 +34,8 @@
                 </div>
                 <div class="d-grip gap-2 align-items-start">
                     <div>
+
+        {% endif %}
 
 
                         <a href="/edit_profile/" class="btn btn-primary boutons">

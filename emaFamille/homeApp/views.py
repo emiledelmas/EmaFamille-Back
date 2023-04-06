@@ -341,9 +341,10 @@ def album_famille(request):
         photoFamille.save()
         return redirect('albumFamille')
     else:
-        famille = Famille.objects.get(chef=request.user)
+        profile = Profile.objects.get(user=request.user)
+        famille = profile.famille
         photos = PhotoFamille.objects.filter(famille=famille).order_by('-date')
-        return render(request, 'albumFamille.html', {'famille': famille, 'photos': photos})
+        return render(request, 'albumFamille.html', {'user':request.user,'famille': famille, 'photos': photos})
 
 @login_required
 def delete_post(request, post_id):
@@ -375,6 +376,15 @@ def supprimer_famille(request):
             famille = Famille.objects.get(chef=request.user)
             famille.delete()
     return redirect('home')
+
+def supprimer_photo(request, photo_id):
+    if request.method=='POST':
+        photo=PhotoFamille.objects.get(id=photo_id)
+        photo.delete()
+        return redirect('albumFamille')
+    else:
+        return redirect('albumFamille')
+
 
 @login_required
 def quitter_famille(request):
