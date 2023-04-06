@@ -123,7 +123,9 @@
                             {% for profile in profiles %}
                                 <div class="card gedf-card">
                                     <div class="card-body">
+                                    {% if profile.photo %}
                                         <img class="rounded-circle" width="50" height="50" src="{{ profile.photo.url }}" alt="">
+                                    {% endif %}
                                         <p class="card-text h5">@{{ profile.user.username }}</p>
 
                                         {% if user == famille.chef %}

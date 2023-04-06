@@ -45,6 +45,7 @@ urlpatterns = [
     path('supprimerAmis/<int:user_id>', views.supprimer_amis, name='supprimerAmis'),
     path('supprimerFamille', views.supprimer_famille, name='supprimerFamille'),
     path('quitterFamille', views.quitter_famille, name='quitterFamille'),
+    path('supprimerPhoto/<int:photo_id>', views.supprimer_photo, name='supprimerPhoto'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
