@@ -2,126 +2,140 @@
 {% load humanize %}
 
 <html>
-    <head>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
-<style>
-.close {
-font-size: 1.5rem;
-}
+<head>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <style>
+        .close {
+            font-size: 1.5rem;
+        }
 
-.col-12 img {
-opacity: 0.7;
-cursor: pointer;
-margin: 2rem;
-width: 100%;
-}
+        .col-12 img {
+            opacity: 0.7;
+            cursor: pointer;
+            margin: 2rem;
+            width: 100%;
+        }
 
-.col-12 img:hover {
-opacity: 1;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-</style>
-<link rel="stylesheet" href="{% static 'Style.css' %}">
+        .col-12 img:hover {
+            opacity: 1;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'Style.css' %}">
 
-<title> EmaFamille </title>
+    <title> EmaFamille </title>
 </head>
 <body>
 {% include 'navbar.html' %}
 <br>
 <main class="text-center m-auto" style="width:70%">
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h1 class="titreProfile text-center">Ajouter des photos</h1>
-            </div>
-            <div class="card-body">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="custom-file">
-                    <label class="custom-file-label" for="customFile" style="width:80%;margin:auto">Uploader</label> 
-                    <input type="file" class="custom-file-input" id="customFile" name="photo" required>
-               </div>
-               <br><br>
-
-               <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i>  Uploader la photo</button>
-            
-            </form>
-    </div>
-</div>
-        <div class="card" style="margin-top:50px">
-<div class="card-header">
-                <h1 class="titreProfile text-center">Galerie photos de la famille <u>{{ famille.nom }}</u></h1>
-            </div>
-                <div class="card-body"
-<div class="container">
-<div class="row d-flex flex-wrap align-items-center" data-toggle="modal" data-target="#lightbox">
-  
-    {% for photo in photos %}
-    <div class="col-12 col-md-6 col-lg-3" >
-<img src="{{ photo.photo.url }}" data-target="#indicators" data-slide-to="{{ forloop.counter0 }}" alt="" style="margin-left:0px"/> 
-  </div>
-  {% endfor %}
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="lightbox" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      
-        <button type="button" class="close text-right p-2" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      <div id="indicators" class="carousel slide" data-interval="false">
-  <ol class="carousel-indicators">
-    {% for photo in photos %} 
-    <li data-target="#indicators" data-slide-to="{{ forloop.counter0 }}"  {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
-    {% endfor %}
-
-  </ol>
-  <div class="carousel-inner">
-    
-
-    {% for photo in photos %}
-
-    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-    <p class="text-muted" id=""><i class="fa fa-clock-o"></i> {{ photo.date|naturaltime }} par <b>@{{ photo.user.username }}</b></p>
-      {% if user == photo.user %}
-            <form action="{% url 'supprimerPhoto' photo.id %}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer la photo?');">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                        Supprimer la photo
-                                    </button>
-                                </form>
-
-      {% endif %}
-      <img class="d-block w-100" src="{{ photo.photo.url }}" alt="a slide">
-    </div>
-    {% endfor %}
-  </div>
-  <a class="carousel-control-prev" href="#indicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Précédente</span>
-  </a>
-  <a class="carousel-control-next" href="#indicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Suivante</span>
-  </a>
-</div>
-
-    </div>
-  </div>
-</div>
-                         </div>
-                         </div>
-                         </div>
-                         </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="titreProfile text-center">Ajouter des photos</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="customFile"
+                                   style="width:80%;margin:auto">Uploader</label>
+                            <input type="file" class="custom-file-input" id="customFile" name="photo" required>
                         </div>
-                    </main>
+                        <br><br>
+
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i> Uploader la photo
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            <div class="card" style="margin-top:50px">
+                <div class="card-header">
+                    <h1 class="titreProfile text-center">Galerie photos de la famille <u>{{ famille.nom }}</u></h1>
+                </div>
+                <div class="card-body"
+                <div class="container">
+                    <div class="row d-flex flex-wrap align-items-center" data-toggle="modal" data-target="#lightbox">
+
+                        {% for photo in photos %}
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <img src="{{ photo.photo.url }}" data-target="#indicators"
+                                     data-slide-to="{{ forloop.counter0 }}" alt="" style="margin-left:0px"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="lightbox" role="dialog" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                                <button type="button" class="close text-right p-2" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div id="indicators" class="carousel slide" data-interval="false">
+                                    <ol class="carousel-indicators">
+                                        {% for photo in photos %}
+                                            <li data-target="#indicators" data-slide-to="{{ forloop.counter0 }}"
+                                                {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
+                                        {% endfor %}
+
+                                    </ol>
+                                    <div class="carousel-inner">
+
+
+                                        {% for photo in photos %}
+
+                                            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                                <p class="text-muted" id=""><i
+                                                        class="fa fa-clock-o"></i> {{ photo.date|naturaltime }} par
+                                                    <b>@{{ photo.user.username }}</b></p>
+                                                {% if user == photo.user %}
+                                                    <form action="{% url 'supprimerPhoto' photo.id %}" method="post"
+                                                          onsubmit="return confirm('Voulez-vous vraiment supprimer la photo?');">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                            Supprimer la photo
+                                                        </button>
+                                                    </form>
+
+                                                {% endif %}
+                                                <img class="d-block w-100" src="{{ photo.photo.url }}" alt="a slide">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#indicators" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Précédente</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#indicators" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Suivante</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <a href="/famille">
+        <button class="w-100 btn btn-lg boutons" type="submit"
+                style="margin-top: 5px; margin-bottom: 20px">Retour
+        </button>
+    </a>
+        </div>
+    </div>
+    </div>
+</main>
 <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js'></script>
 <body>
