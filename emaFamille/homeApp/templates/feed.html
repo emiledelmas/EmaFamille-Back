@@ -83,6 +83,20 @@
                                 <i class="far fa-user-circle"></i> Accès Profil
                             </a>
                         </div>
+
+
+
+
+
+                        <div>
+                            <a href="{% if onlyFriends %} / {% else %}onlyfriends{% endif %}"  style="margin-bottom:20px;color:black">
+
+                                 <input class="form-check-input flex-shrink-0" type="checkbox" value="" {% if onlyFriends %} checked {% endif %}>
+                            <span>
+                            Amis Uniquement
+                            </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 gedf-main">
@@ -160,10 +174,10 @@
                                              alt="">
                                     {% endif %}
                                     <p class="card-text h5">@{{ p.user.username }}</p>
-                                <div class="h7 text-muted">{{ p.user.first_name }} {{ p.user.last_name }}</div>
-                                        {% if profile.description %}
-                                            <div class="h7">{{ p.description }}</div>
-                                        {% endif %}
+                                    <div class="h7 text-muted">{{ p.user.first_name }} {{ p.user.last_name }}</div>
+                                    {% if profile.description %}
+                                        <div class="h7">{{ p.description }}</div>
+                                    {% endif %}
                                     {% if p.user not in profile.amis.all %}
                                         <form action="{% url 'ajout_rapide' %}" method="post"
                                               id="ajout_rapide{{ p.id }}">

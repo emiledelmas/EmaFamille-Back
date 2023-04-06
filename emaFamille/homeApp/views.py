@@ -405,3 +405,10 @@ def searchfriend(request):
     famille = profile.famille
     return render(request, 'feed.html', {'user': request.user, "profile": profile, 'seachedProfiles': seachedProfiles,'ajout': ajout, 'famille': famille})
 
+def onlyfriends(request):
+        profile = Profile.objects.get(user=request.user)
+        posts_feed = Post_Feed.objects.filter(auteur__in=profile.amis.all()).order_by("-date")
+        ajout = Profile.objects.all().exclude(user=request.user).order_by("?")[:2]
+        famille = profile.famille
+        onlyFriends = True
+        return render(request, 'feed.html', {'user': request.user, 'Posts_Feed': posts_feed, "profile": profile, 'ajout': ajout, 'famille': famille,'onlyFriends':onlyFriends})

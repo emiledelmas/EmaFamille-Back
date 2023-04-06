@@ -32,6 +32,7 @@ urlpatterns = [
     path('like', views.like, name='like'),
     path('search', views.search, name='search'),
     path('searchfriend', views.searchfriend, name='searchfriend'),
+    path('onlyfriends', views.onlyfriends, name='onlyfriends'),
     path('ajout_rapide', views.ajout_rapide, name='ajout_rapide'),
     path('registerfamily/', views.register_family, name='registerfamily'),
     path('comment', views.comment, name='comment'),
