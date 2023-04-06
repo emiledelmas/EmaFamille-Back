@@ -31,6 +31,7 @@ urlpatterns = [
     path('famille', views.profile_famille, name='famille'),
     path('like', views.like, name='like'),
     path('search', views.search, name='search'),
+    path('searchfriend', views.searchfriend, name='searchfriend'),
     path('ajout_rapide', views.ajout_rapide, name='ajout_rapide'),
     path('registerfamily/', views.register_family, name='registerfamily'),
     path('comment', views.comment, name='comment'),
