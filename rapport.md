@@ -97,7 +97,7 @@ Extrait de Readme.md du dépôt [EmaFamille-Back](https://github.com/emiledelmas
 
 9. Go to http://localhost:8000/admin/, login with superuser account and create a profile (Profiles) for the superuser.
 
-10. Go to localhost:8000 and enjoy !
+10. Go to http://localhost:8000 and enjoy !
 
 ## Notice d'utilisation
 

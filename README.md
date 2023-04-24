@@ -62,9 +62,9 @@
 
 9. Go to http://localhost:8000/admin/, login with superuser account and create a profile (Profiles) for the superuser.
 
-10. Go to localhost:8000 and enjoy !
+10. Go to http://localhost:8000 and enjoy !
 
-## Membres de l'équipe
+## Members
 
 - Emile Delmas [@emiledelmas](https://www.github.com/emiledelmas)
 - Simon Chalmé [@simonchalme](https://www.github.com/simonchalme)
