@@ -1,99 +1,103 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
-
 {% block head %}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="author"
+          content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.108.0">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    <link rel="canonical"
+          href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
     <link href="ConnexionCSS.css" rel="stylesheet">
     <link rel="stylesheet" href="Style.css">
     <link rel="stylesheet" href="Style_page_forum.css"/>
-
 {% endblock %}
-
-
 {% block content %}
     <div class="text-center">
         <div class="container">
             <main class="form-signin w-100 m-auto">
-                <img class="mb-4" src="{% static 'Logo_EMAFamille.PNG' %}" alt="" width="72" height="72">
-                <h1 class="titreProfile">Demandes pour rentrer dans la famille <u>{{ famille.nom }}</u></h1>
-                <p>{{ error }} </p>
+                <img class="mb-4"
+                     src="{% static 'Logo_EMAFamille.PNG' %}"
+                     alt=""
+                     width="72"
+                     height="72">
+                <h1 class="titreProfile">
+                    Demandes pour rentrer dans la famille <u>{{ famille.nom }}</u>
+                </h1>
+                <p>{{ error }}</p>
                 <br>
                 <div class="container-fluid gedf-wrapper">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-
                                 <div class="card-body">
                                     <h1 class="titreProfile">Liste des demandes</h1>
                                     <br>
                                     <div>
-                                    {% for request in pendingFamilyRequests %}
-                                    {% comment %} every 4 add a row  {% endcomment %}
-                                    {% if forloop.counter0|divisibleby:4 %}
-                                    </div>
-                                    <div class="row mt-5">
-                                        {% endif %}
-                                        <div class="col-md-3">
-                                        <div class="card list-group w-auto" style="margin-top:20px">
-                                            <div class="card-header">
-                                            <img class="rounded-circle" width="50" height='50' src="{{ request.user.profile.photo.url }}"
-                                                 alt="">
-                                            <h5 >{{ request.user.username }}</h5>
-                                            <p class="h6 text-muted"> {{ request.user.first_name }} {{ request.user.last_name }}</p>
-                                            <p class="h6 text-muted"><i class="fa fa-clock-o"></i> {{ request.date|naturaltime}} </p>
+                                        {% for request in pendingFamilyRequests %}
+                                            {% comment %} every 4 add a row  {% endcomment %}
+                                            {% if forloop.counter0|divisibleby:4 %}
                                             </div>
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                    <i class="fa fa-envelope"></i> {{ request.user.email }}
-                                                </p>
-                                                <p class="card-text">
-                                                    <i class="fa fa-"></i> Promo : {{ request.user.profile.promo }}
-                                                </p>
-                                            
-                                                <form method="post" action="{% url 'acceptPendingRequest' %}">
-                                                    {% csrf_token %}
-
-                                                    <input type="hidden" name="request_user_id" value="{{ request.user.id }}">
-
-        
-                                                    <button class="btn btn-success" type="submit">
-                                                        <i class="fa fa-check"></i>
-                                                        Accepter la demande
-                                                </button>
-
-                                                </form>
+                                            <div class="row mt-5">
+                                            {% endif %}
+                                            <div class="col-md-3">
+                                                <div class="card list-group w-auto" style="margin-top:20px">
+                                                    <div class="card-header">
+                                                        <img class="rounded-circle"
+                                                             width="50"
+                                                             height='50'
+                                                             src="{{ request.user.profile.photo.url }}"
+                                                             alt="">
+                                                        <h5 >{{ request.user.username }}</h5>
+                                                        <p class="h6 text-muted">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                                        <p class="h6 text-muted">
+                                                            <i class="fa fa-clock-o"></i> {{ request.date|naturaltime }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p class="card-text">
+                                                            <i class="fa fa-envelope"></i> {{ request.user.email }}
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <i class="fa fa-"></i> Promo : {{ request.user.profile.promo }}
+                                                        </p>
+                                                        <form method="post" action="{% url 'acceptPendingRequest' %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="request_user_id" value="{{ request.user.id }}">
+                                                            <button class="btn btn-success" type="submit">
+                                                                <i class="fa fa-check"></i>
+                                                                Accepter la demande
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-
+                                <br>
+                                <br>
+                                <br>
                             </div>
-                            <br><br><br>
-
                         </div>
                     </div>
-                </div>
-            </main>
-        </div>
-
-
-        <a href="/famille">
-            <button class="btn btn-lg boutons" type="submit" style="margin-top: 10px">Retour
-            </button>
-        </a>
+                </main>
+            </div>
+            <a href="/famille">
+                <button class="btn btn-lg boutons" type="submit" style="margin-top: 10px">Retour</button>
+            </a>
         </main>
     </div>
-
-    <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
-
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">   
+    <script src="https://kit.fontawesome.com/eab4ac3966.js"
+            crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous">
 {% endblock %}

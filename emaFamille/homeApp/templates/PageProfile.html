@@ -1,77 +1,70 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<br><br>
-<main class="text-center m-auto" style="width:70%">
+    <br>
+    <br>
+    <main class="text-center m-auto" style="width:70%">
         <div class="col-md-12">
             <div class="card">
-
                 <div class="card-header">
-
-        <h1 class="titreProfile">Mon profil </h1>
+                    <h1 class="titreProfile">Mon profil</h1>
                 </div>
-
-        <div class="card-body">
-
-        <img src="{{ profile.photo.url }}" width="50%" height="50%" class="photoDeProfile">
-        <br>
-        <br>
-
-{% if profil.photo %}
-        <p>Identifiant : {{ user.username }}</p>
-        <p>Nom : {{ user.last_name }}</p>
-
-        <p>Prénom : {{ user.first_name }}</p>
-
-        <p>Promo: {{ profile.promo }}</p>
-        {% if profile.description %}
-        <p>Description: {{ profile.description }}</p>
-        {% endif %}
-        <br>
-        <div class="container">
-            <div class="row g-4 row-cols-lg-5 row-cols-sm-1 row-cols-xs-1">
-                <div class="d-grip gap-2 align-items-start">
-                </div>
-                <div class="d-grip gap-2 align-items-start">
-                    <div>
-
-        {% endif %}
-
-
-                        <a href="/edit_profile/" class="btn btn-primary boutons">
-                            <i class="fas fa-user-edit"></i>
-                                     Modifier mon profil
-                        </a>
+                <div class="card-body">
+                    <img src="{{ profile.photo.url }}"
+                         width="50%"
+                         height="50%"
+                         class="photoDeProfile">
+                    <br>
+                    <br>
+                    {% if profil.photo %}
+                        <p>Identifiant : {{ user.username }}</p>
+                        <p>Nom : {{ user.last_name }}</p>
+                        <p>Prénom : {{ user.first_name }}</p>
+                        <p>Promo: {{ profile.promo }}</p>
+                        {% if profile.description %}<p>Description: {{ profile.description }}</p>{% endif %}
+                        <br>
+                        <div class="container">
+                            <div class="row g-4 row-cols-lg-5 row-cols-sm-1 row-cols-xs-1">
+                                <div class="d-grip gap-2 align-items-start"></div>
+                                <div class="d-grip gap-2 align-items-start">
+                                    <div>
+                                    {% endif %}
+                                    <a href="/edit_profile/" class="btn btn-primary boutons">
+                                        <i class="fas fa-user-edit"></i>
+                                        Modifier mon profil
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-grip gap-2 align-items-start">
+                                <div>
+                                    <a href="/" class="btn btn-primary boutons">
+                                        <i class="fa fa-home"></i>
+                                        Home
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-grip gap-2 align-items-start">
+                                <div>
+                                    <a href="/logout/" class="btn btn-primary boutons">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Se déconnecter
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-grip gap-2 align-items-start"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="d-grip gap-2 align-items-start">
-
-                    <div>
-                        <a href="/" class="btn btn-primary boutons">
-                         <i class="fa fa-home"></i>
-                            Home
-                        </a>
-                    </div>
-                </div>
-                <div class="d-grip gap-2 align-items-start">
-                    <div>
-                        <a href="/logout/" class="btn btn-primary boutons">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Se déconnecter
-                        </a>
-                    </div>
-                </div>
-                <div class="d-grip gap-2 align-items-start">
+                    <br>
+                    <p>
+                        Dans le cadre du respect de la <a href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on">loi Européenne RGPD</a>,
+                        <br>
+                        vous pouvez demander à avoir une copie ou supprimer vos données <a href="mailto:contact@emafamille.fr">contact@emafamille.fr</a>
+                    </p>
                 </div>
             </div>
         </div>
-        <br>
-        <p>Dans le cadre du respect de la <a href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on">loi Européenne RGPD</a>, <br> vous pouvez demander à avoir une copie ou supprimer vos données <a href="mailto:contact@emafamille.fr">contact@emafamille.fr</a> </p>
     </div>
-</div>
-</div>
-</div>
 </main>
-<script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/eab4ac3966.js"
+        crossorigin="anonymous"></script>
 {% endblock %}

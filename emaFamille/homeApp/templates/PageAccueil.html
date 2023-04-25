@@ -1,44 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <div class="text-center">
-    <img src="{% static 'Logo_EMAFamille.PNG' %}" width="30%">
+    <img src="{% static 'Logo_EMAFamille.PNG' %}" width="30%" alt="logo of EmaFamille">
     <br>
     <div class="card m-auto" style="width:90%">
-    <div class="card-header">
-        <h1 class="titreProfile">Bienvenue</h1>
-    </div>
-
+        <div class="card-header">
+            <h1 class="titreProfile">Bienvenue</h1>
+        </div>
         <div class="card-body">
-            <h5 class="text-muted"> Parce que la famille, c'est la Famille <i class="fas fa-heart"></i></h5>
-      
-
-    <div class="container">
-        <div class="row justify-content-center py-5">
-            <div class="col-lg-9">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
-                        <a href="login/" class="btn btn-primary boutons">
-                            <i class="fas fa-sign-in-alt"></i> Me connecter
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
-                        <a href="register/" class="btn btn-primary boutons">
-                            <i class="fas fa-user-plus"></i> M'inscrire
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
-                        <a href="presentation" class="btn btn-primary boutons">
-                            <i class="fas fa-info-circle"></i> En savoir plus sur EMA Famille
-                        </a>
+            <h5 class="text-muted">
+                Parce que la famille, c'est la Famille <i class="fas fa-heart"></i>
+            </h5>
+            <div class="container">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-9">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
+                                <a href="login/" class="btn btn-primary boutons">
+                                    <i class="fas fa-sign-in-alt"></i> Me connecter
+                                </a>
+                            </div>
+                            <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
+                                <a href="register/" class="btn btn-primary boutons">
+                                    <i class="fas fa-user-plus"></i> M'inscrire
+                                </a>
+                            </div>
+                            <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
+                                <a href="presentation" class="btn btn-primary boutons">
+                                    <i class="fas fa-info-circle"></i> En savoir plus sur EMA Famille
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
 {% endblock %}

@@ -1,30 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <a class="navbar-brand titreProfile" href="/" style="font-size:25px">Ema Famille</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav m-auto">
-        {% if nb_membre %}
-        <li class="nav-item d-none d-lg-block">
-          <a href="/" class="btn btn-primary boutons" style="width:100%;margin:auto">
-            <i class="fa fa-home"></i> Page Perso
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-      <form class="my-2 my-lg-0" method="post" action="{% url 'search' %}">
-        {% csrf_token %}
-        <input type="hidden" value="search" name="postType">
-        <div class="input-group">
-          <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" placeholder="Votre Recherche" name="query">
-          <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit" id="button-addon2">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+        <ul class="navbar-nav m-auto">
+            {% if nb_membre %}
+                <li class="nav-item d-none d-lg-block">
+                    <a href="/"
+                       class="btn btn-primary boutons"
+                       style="width:100%;
+                              margin:auto">
+                        <i class="fa fa-home"></i> Page Perso
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+        <form class="my-2 my-lg-0" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="hidden" value="search" name="postType">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       aria-label="Recipient's username"
+                       aria-describedby="button-addon2"
+                       placeholder="Votre Recherche"
+                       name="query">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-  </nav>
-  
+</nav>

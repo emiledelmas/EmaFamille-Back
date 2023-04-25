@@ -1,115 +1,106 @@
 {% extends 'base.html' %}
 {% block head %}
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          id="bootstrap-css">
     <link href="ConnexionCSS.css" rel="stylesheet">
 {% endblock %}
-
 {% block content %}
-
     <main class="text-center m-auto" style="width:80%">
-
         <div style="text-align: center;">
-            
-
-<br>
-<br>
+            <br>
+            <br>
             <div class="col-md-12">
                 <div class="card">
-
                     <div class="card-body">
                         <h1 class="titreProfile">Modifier la famille</h1>
-            <p>{{ error }}</p>  
-            <form method="post" enctype='multipart/form-data'>
-                {% csrf_token %}
-            <label for="nom" class="form-label">Nom de la famille</label>
-            <div class="col d-grip gap-2 align-items-start">
-                <input type="text" class="form-control" id="nom" value="{{ famille.nom }}" name="nom" required>
-                <div class="invalid-feedback">
-                    déja pris deso
-                </div>
-
+                        <p>{{ error }}</p>
+                        <form method="post" enctype='multipart/form-data'>
+                            {% csrf_token %}
+                            <label for="nom" class="form-label">Nom de la famille</label>
+                            <div class="col d-grip gap-2 align-items-start">
+                                <input type="text"
+                                       class="form-control"
+                                       id="nom"
+                                       value="{{ famille.nom }}"
+                                       name="nom"
+                                       required>
+                                <div class="invalid-feedback">déja pris deso</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="drive" class="form-label">
+                                    Lien du drive
+                                    <span class="text-muted">(Optionel)</span>
+                                </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="drive"
+                                       value="{% if famille.drive %}{{ famille.drive }}{% endif %}"
+                                       name="drive">
+                                <div class="invalid-feedback">pas valide</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description">{{ famille.description }}</textarea>
+                                <div class="invalid-feedback">pas valide</div>
+                            </div>
+                            <div class="col-12">
+                                <img src="{{ famille.logo.url }}"
+                                     alt="Logo de la famille"
+                                     style="width: 100px;
+                                            height: 100px;
+                                            border-radius: 50%;
+                                            margin-top: 20px;
+                                            margin-bottom: 20px">
+                                <p>Changer le logo de la famille</p>
+                                <div class="custom-file">
+                                    <label class="custom-file-label" for="customFile">
+                                        Uploader
+                                        l'image
+                                    </label>
+                                    <input type="file" class="custom-file-input" id="customFile" name="logo">
+                                    <div class="py-4"></div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">pas valide</div>
+                        </div>
+                        <br>
+                        <div class="col-12">
+                            {% comment %} Changer le chef de famille {% endcomment %}
+                            <label for="chef" class="form-label">Chef de famille</label>
+                            <select class="form-select" id="chef" name="chef_id">
+                                <option value="{{ famille.chef.id }}">
+                                    {{ famille.chef.username }} ({{ famille.chef.first_name }} {{ famille.chef.last_name }})
+                                </option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}">
+                                        {{ user.username }} ({{ user.first_name }} {{ user.last_name }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">pas valide</div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <button class="btn btn-lg boutons"
+                                type="submit"
+                                style="width:50%;
+                                       margin:auto">Valider</button>
+                        <br>
+                    </div>
+                </form>
             </div>
-
-            
-
-
-            <div class="col-12">
-                <label for="drive" class="form-label">
-                    Lien du drive
-                    <span class="text-muted">(Optionel)</span>
-                </label>
-                <input type="text" class="form-control" id="drive" value="{% if famille.drive %}{{ famille.drive }}{% endif%}" name="drive">
-                <div class="invalid-feedback">
-                    pas valide
-                </div>
-                
-
-            </div>
-
-  <div class="col-12">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description">{{ famille.description }}</textarea>
-                    <div class="invalid-feedback">
-                    pas valide
-                </div>
-
-
-            </div>
-                
-            
-  <div class="col-12">
-    <img src="{{ famille.logo.url }}" alt="Logo de la famille" style="width: 100px; height: 100px; border-radius: 50%; margin-top: 20px; margin-bottom: 20px">
-    <p>Changer le logo de la famille</p>
-
-            <div class="custom-file">
-                <label class="custom-file-label" for="customFile">Uploader
-                    l'image</label> 
-                <input type="file" class="custom-file-input" id="customFile" name="logo">
-            <div class="py-4"></div>
+        </div>
     </div>
-</div><div class="invalid-feedback">
-        pas valide
-    </div>
-
-</div>
     <br>
-
-
-    <div class="col-12">
-        {% comment %} Changer le chef de famille {% endcomment %}
-        <label for="chef" class="form-label">Chef de famille</label>
-        <select class="form-select" id="chef" name="chef_id">
-            <option value="{{ famille.chef.id }}">{{ famille.chef.username }} ({{ famille.chef.first_name }} {{ famille.chef.last_name }})</option>
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.username }} ({{ user.first_name }} {{ user.last_name }})</option>
-            {% endfor %}
-        </select>
-    <div class="invalid-feedback">
-            pas valide
-        </div>
-
-    </div>
-        <br><br><br>
-        <button class="btn btn-lg boutons" type="submit" style="width:50%;margin:auto">Valider</button>
-        <br>
-
+    <br>
+    <a href="/famille">
+        <button class="w-100 btn btn-lg boutons"
+                type="submit"
+                style="margin-top: 5px;
+                       margin-bottom: 20px">Retour</button>
+    </a>
 </div>
-
-
-
-
-            </form>
-
-        </div>
-        </div>
-    </div>
-            <br>
-            <br>
-            <a href="/famille">
-                <button class="w-100 btn btn-lg boutons" type="submit"
-                        style="margin-top: 5px; margin-bottom: 20px">Retour
-                </button>
-            </a>
-        </div>
-    </main>
+</main>
 {% endblock %}

@@ -2,7 +2,9 @@
 {% load static %}
 {% load humanize %}
 {% block head %}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          rel="stylesheet"
+          id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Style.css">
@@ -37,33 +39,27 @@
             display: none;
         }
     </style>
-
 {% endblock %}
-
-
 {% block content %}
     <div class="text-center">
         <!-- Card Group with img as a social network feed in one column -->
-
         {% include 'navbar.html' %}
-
-
         <div class="container-fluid gedf-wrapper">
             <div class="row">
                 <div class="col-md-3">
                     <div class="card mt-10">
-
                         <div class="card-body">
                             {% if profile.photo %}
-                                <img class="rounded-circle" width="50%" height="50%" src="{{ profile.photo.url }}"
+                                <img class="rounded-circle"
+                                     width="50%"
+                                     height="50%"
+                                     src="{{ profile.photo.url }}"
                                      alt="">
                             {% endif %}
                             <br>
                             <div class="h5">@{{ user.username }}</div>
                             <div class="h7 text-muted">{{ user.first_name }} {{ user.last_name }}</div>
-                            {% if profile.description %}
-                                <div class="h7">{{ profile.description }}</div>
-                            {% endif %}
+                            {% if profile.description %}<div class="h7">{{ profile.description }}</div>{% endif %}
                         </div>
                         <ul class="list-group list-group-flush">
                             <a href="searchfriend">
@@ -73,28 +69,23 @@
                                 </li>
                             </a>
                         </ul>
-
                     </div>
                     <br>
                     <div class="col d-grip gap-2 align-items-start">
-
                         <div>
                             <a href="profile/" class="btn btn-primary " style="margin-bottom:20px">
                                 <i class="far fa-user-circle"></i> Accès Profil
                             </a>
                         </div>
-
-
-
-
-
                         <div>
-                            <a href="{% if onlyFriends %} / {% else %}onlyfriends{% endif %}"  style="margin-bottom:20px;color:black">
-
-                                 <input class="form-check-input flex-shrink-0" type="checkbox" value="" {% if onlyFriends %} checked {% endif %}>
-                            <span>
-                            Amis Uniquement
-                            </span>
+                            <a href="{% if onlyFriends %} / {% else %}onlyfriends{% endif %}"
+                               style="margin-bottom:20px;
+                                      color:black">
+                                <input class="form-check-input flex-shrink-0"
+                                       type="checkbox"
+                                       value=""
+                                       {% if onlyFriends %} checked{% endif %}>
+                                <span>Amis Uniquement</span>
                             </a>
                         </div>
                     </div>
@@ -108,35 +99,51 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts"
-                                           role="tab" aria-controls="posts" aria-selected="true"><i
-                                                class="fas fa-feather-alt"></i> Faire une publication</a>
+                                        <a class="nav-link active"
+                                           id="posts-tab"
+                                           data-toggle="tab"
+                                           href="#posts"
+                                           role="tab"
+                                           aria-controls="posts"
+                                           aria-selected="true"><i class="fas fa-feather-alt"></i> Faire une publication</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="images-tab" data-toggle="tab" role="tab"
-                                           aria-controls="images" aria-selected="false" href="#images"><i
-                                                class="fas fa-image"></i> Image</a>
+                                        <a class="nav-link"
+                                           id="images-tab"
+                                           data-toggle="tab"
+                                           role="tab"
+                                           aria-controls="images"
+                                           aria-selected="false"
+                                           href="#images"><i class="fas fa-image"></i> Image</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                    <div class="tab-pane fade show active"
+                                         id="posts"
+                                         role="tabpanel"
                                          aria-labelledby="posts-tab">
                                         <div class="form-group">
                                             <label class="sr-only" for="message">post</label>
-                                            <textarea class="form-control" id="message" rows="3"
-                                                      placeholder="A quoi pensez-vous?" name="texte"></textarea>
+                                            <textarea class="form-control"
+                                                      id="message"
+                                                      rows="3"
+                                                      placeholder="A quoi pensez-vous?"
+                                                      name="texte"></textarea>
                                         </div>
-
                                     </div>
-                                    <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                                    <div class="tab-pane fade"
+                                         id="images"
+                                         role="tabpanel"
+                                         aria-labelledby="images-tab">
                                         <div class="form-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile"
-                                                       name="image">
-                                                <label class="custom-file-label" for="customFile">Uploader
-                                                    l'image</label>
+                                                <input type="file" class="custom-file-input" id="customFile" name="image">
+                                                <label class="custom-file-label" for="customFile">
+                                                    Uploader
+                                                    l'image
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="py-4"></div>
@@ -144,25 +151,19 @@
                                 </div>
                                 <div class="btn-toolbar justify-content-between">
                                     <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa fa-paper-plane"></i>
                                             Publier
                                         </button>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
                     </form>
-
                     <!-- Post /////-->
                     {% if query %}
                         <div class="card-body">
-
-                            <p class="card-text">
-                                Résultats de la recherche de "{{ query }}"
-                            </p>
+                            <p class="card-text">Résultats de la recherche de "{{ query }}"</p>
                         </div>
                     {% endif %}
                     {% if seachedProfiles %}
@@ -170,16 +171,18 @@
                             <div class="card gedf-card" style="margin-top:10px">
                                 <div class="card-body">
                                     {% if p.photo %}
-                                        <img width="10%" height="10%" class="rounded-circle" src="{{ p.photo.url }}"
+                                        <img width="10%"
+                                             height="10%"
+                                             class="rounded-circle"
+                                             src="{{ p.photo.url }}"
                                              alt="">
                                     {% endif %}
                                     <p class="card-text h5">@{{ p.user.username }}</p>
                                     <div class="h7 text-muted">{{ p.user.first_name }} {{ p.user.last_name }}</div>
-                                    {% if profile.description %}
-                                        <div class="h7">{{ p.description }}</div>
-                                    {% endif %}
+                                    {% if profile.description %}<div class="h7">{{ p.description }}</div>{% endif %}
                                     {% if p.user not in profile.amis.all %}
-                                        <form action="{% url 'ajout_rapide' %}" method="post"
+                                        <form action="{% url 'ajout_rapide' %}"
+                                              method="post"
                                               id="ajout_rapide{{ p.id }}">
                                             {% csrf_token %}
                                             <input type="hidden" name="user_id" value="{{ p.user.id }}">
@@ -190,7 +193,8 @@
                                             </a>
                                         </form>
                                     {% else %}
-                                        <form action="{% url 'supprimerAmis' p.user.id %}" method="post"
+                                        <form action="{% url 'supprimerAmis' p.user.id %}"
+                                              method="post"
                                               id="supprimer_amis{{ p.id }}">
                                             {% csrf_token %}
                                             <a href="javascript:void(0);"
@@ -200,7 +204,6 @@
                                             </a>
                                         </form>
                                     {% endif %}
-
                                 </div>
                             </div>
                         {% endfor %}
@@ -212,8 +215,11 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
-                                            <img class="rounded-circle" width="45" height="45"
-                                                 src="{{ post.auteur.profile.photo.url }}" alt="">
+                                            <img class="rounded-circle"
+                                                 width="45"
+                                                 height="45"
+                                                 src="{{ post.auteur.profile.photo.url }}"
+                                                 alt="">
                                         </div>
                                         <div class="ml-2">
                                             <div class="h5 m-0">@{{ post.auteur }}</div>
@@ -222,14 +228,14 @@
                                     </div>
                                     <div>
                                         {% if user == post.auteur %}
-
                                             <div class="dropdown">
-                                                <button class="btn btn-link dropdown-toggle" type="button"
-                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                <button class="btn btn-link dropdown-toggle"
+                                                        type="button"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
                                                         aria-expanded="false">
                                                     <i class="fa fa-ellipsis-h"></i>
                                                 </button>
-
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="gedf-drop1">
                                                     <div class="h6 dropdown-header">Avancé</div>
@@ -238,75 +244,61 @@
                                                         <button type="submit" class="dropdown-item">Supprimer</button>
                                                     </form>
                                                     {% comment %}
-                                                        <a class="dropdown-item" href="">Supprimer</a> {% endcomment %}
+                                                    <a class="dropdown-item" href="">Supprimer</a> {% endcomment %}
                                                 </div>
                                             </div>
                                         {% endif %}
                                     </div>
                                 </div>
-
                             </div>
                             <div class="card-body">
-                                {% if post.image %}
-                                    <img src="{{ post.image.url }}" class="img-fluid" alt="image desc">
-                                {% endif %}
-                                <div class="text-muted h7 mb-2 align-items-center"><i
-                                        class="fa fa-clock-o"></i> {{ post.date| naturaltime }} </div>
+                                {% if post.image %}<img src="{{ post.image.url }}" class="img-fluid" alt="image desc">{% endif %}
+                                <div class="text-muted h7 mb-2 align-items-center">
+                                    <i class="fa fa-clock-o"></i> {{ post.date| naturaltime }}
+                                </div>
                                 <a class="card-link" href="#">
                                     <h5 class="card-title text-dark"></h5>
                                 </a>
-
-                                <p class="card-text">
-                                    {{ post.texte|linebreaks }}
-                                </p>
+                                <p class="card-text">{{ post.texte|linebreaks }}</p>
                             </div>
                             <div class="card-footer">
                                 {% comment %}
                                     <form action="{% url 'like' %}" method="post" id="likeForm{{ post.id }}">
                                         {% csrf_token %}
                                         <input type="hidden" name="post_id" value="{{ post.id }}">
-                                        <a href="javascript:void(0);"
-                                           onclick="document.getElementById('likeForm{{ post.id }}').submit();"
-                                           class="card-link"
-                                           style="{% if user not in post.likes.all %}color:grey;{% endif %}">
+                                        <a href="javascript:void(0);" onclick="document.getElementById('likeForm{{ post.id }}').submit();" class="card-link" style="{% if user not in post.likes.all %}color:grey;{% endif %}">
                                             <i class="fa fa-thumbs-up"></i> {{ post.likes.count }}
                                             Like{{ post.likes.count|pluralize }}
                                         </a>
                                         <a href="" class="card-link" style="color:grey;"><i class="fa fa-comment"></i>
                                             Comment</a>
-                                        <a href="" class="card-link" style="color:grey;"><i
-                                                class="fa fa-mail-forward"></i> Share</a>
-                                    </form> {% endcomment %}
-
-
-
-                                <a href="javascript:void(0)" class="card-link" id="like{{ post.id }}"
+                                        <a href="" class="card-link" style="color:grey;"><i class="fa fa-mail-forward"></i> Share</a>
+                                </form> {% endcomment %}
+                                <a href="javascript:void(0)"
+                                   class="card-link"
+                                   id="like{{ post.id }}"
                                    {% if user not in post.likes.all %}style="color:grey;"{% endif %}>
                                     <i class="fa fa-thumbs-up"></i>
                                     {{ post.likes.count }} Like{{ post.likes.count|pluralize }}
                                 </a>
-
-
-                                <a href="javascript:void(0)" class="card-link" style="color:grey;"
+                                <a href="javascript:void(0)"
+                                   class="card-link"
+                                   style="color:grey"
                                    id="comment{{ post.id }}"><i class="fa fa-comment"></i> {{ post.nbComment }} Comment</a>
-
                                 {% comment "" %}
-                                    <textarea class="form-control" id="commentTextArea{{ post.id }}" rows="3"
-                                              style="display:none;margin-top:10px"></textarea>
+                                    <textarea class="form-control" id="commentTextArea{{ post.id }}" rows="3" style="display:none;margin-top:10px"></textarea>
                                 {% endcomment %}
-
-
-
-
-
                                 <script>
-
-                                    const csrftoken{{ post.id }} = '{{ csrf_token }}'
+                                    const csrftoken {
+                                        {
+                                            post.id
+                                        }
+                                    } = '{{ csrf_token }}'
 
                                     document.getElementById('like{{ post.id }}').onclick = () => {
 
                                         const requestObj = new XMLHttpRequest()
-                                        requestObj.onreadystatechange = function () {
+                                        requestObj.onreadystatechange = function() {
                                             if (this.readyState == 4 && this.status == 200) {
                                                 console.log(this.responseText)
                                                 if (this.responseText[0] == '1') {
@@ -321,7 +313,11 @@
                                         }
 
                                         requestObj.open("POST", "{% url 'like' %}")
-                                        requestObj.setRequestHeader("X-CSRFToken", csrftoken{{ post.id }})
+                                        requestObj.setRequestHeader("X-CSRFToken", csrftoken {
+                                            {
+                                                post.id
+                                            }
+                                        })
 
                                         const formdata = new FormData()
                                         formdata.append('post_id', '{{ post.id }}')
@@ -343,15 +339,19 @@
                                     }
                                 </script>
                             </div>
-                            <div class="card-footer" id="commentsSection{{ post.id }}" style="display:none">
+                            <div class="card-footer"
+                                 id="commentsSection{{ post.id }}"
+                                 style="display:none">
                                 {% for comment in comments %}
                                     {% if comment.post.id == post.id %}
                                         <div style="display:flex;">
                                             <div style="flex:1;">
                                                 <div class="h7 text-muted" style="text-align:left;">
                                                     <i class="fa fa-reply" style="text-align:left;"></i>
-                                                    <img class="rounded-circle" width="20"
-                                                         src="{{ comment.auteur.profile.photo.url }}" alt="">
+                                                    <img class="rounded-circle"
+                                                         width="20"
+                                                         src="{{ comment.auteur.profile.photo.url }}"
+                                                         alt="">
                                                     {{ comment.auteur }}
                                                 </div>
                                             </div>
@@ -361,22 +361,24 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <p class="card-text">
-                                            {{ comment.body|linebreaks }}
-                                        </p>
+                                        <p class="card-text">{{ comment.body|linebreaks }}</p>
                                     {% endif %}
                                 {% endfor %}
                             </div>
-
                             <form action="{% url 'comment' %}" method="post">
                                 {% csrf_token %}
-                                <div class="float-end mt-2 pt-1" id="commentTextArea{{ post.id }}"
-                                     style="display:none;margin-top:10px;width: 100%;">
+                                <div class="float-end mt-2 pt-1"
+                                     id="commentTextArea{{ post.id }}"
+                                     style="display:none;
+                                            margin-top:10px;
+                                            width: 100%">
                                     <input type="hidden" name="post_id" value="{{ post.id }}">
-                                    <textarea class="form-control" name="text" rows="3"
+                                    <textarea class="form-control"
+                                              name="text"
+                                              rows="3"
                                               placeholder="Ecrire votre commentaire ici"
-                                              style="width:90%;margin:auto"></textarea>
+                                              style="width:90%;
+                                                     margin:auto"></textarea>
                                     <button type="submit" class="btn btn-primary btn-sm" style="margin:10px">
                                         <i class="fa fa-send"></i> Publier le commentaire
                                     </button>
@@ -385,15 +387,14 @@
                         </div>
                         <!-- Post /////-->
                     {% endfor %}
-
                 </div>
                 <div class="col-md-3" style="margin-top:20px">
                     <div class="card gedf-card">
                         <div class="card-body">
                             {% if famille %}
-                                <h5 class="card-title"> Ma Famille </h5>
-                                <h6 class="card-subtitle mb-2 text-muted"> {{ famille.nom }} </h6>
-                                <p class="card-text">{{ famille.description }} </p>
+                                <h5 class="card-title">Ma Famille</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ famille.nom }}</h6>
+                                <p class="card-text">{{ famille.description }}</p>
                                 <br/>
                                 {% if famille.logo %}
                                     <img width="50%" height="50%" src="{{ famille.logo.url }}" alt="">
@@ -401,33 +402,47 @@
                                 <br/>
                                 <br/>
                                 <a href="famille" class="card-link"><i class="fa fa-users"></i> Ma Famille</a>
-                                <a {% if famille.drive %}href="{{ famille.drive }}"
-                                   {% else %}style="color:grey" {% endif %} target="_blank" class="card-link"><i
-                                        class="fab fa-google-drive"></i> Drive</a>
+                                <a {% if famille.drive %}href="{{ famille.drive }}" {% else %}style="color:grey" {% endif %}
+                                   target="_blank"
+                                   class="card-link"><i class="fab fa-google-drive"></i> Drive</a>
                             {% else %}
                                 <h5 class="card-title">Pas de Famille</h5>
                                 <a href="famille" class="card-link"><i class="fa fa-users"></i> Rejoindre/Crée une
-                                    famille</a>
+                                famille</a>
                             {% endif %}
                         </div>
                     </div>
                     <div class="card gedf-card" style="margin-top:20px">
                         <div class="card-body">
-                            <h5 class="card-title"><i class="far fa-id-badge"></i> Ajout Rapide </h5>
-                            <h6 class="card-subtitle mb-2 text-muted">ajoute ces BG </h6>
+                            <h5 class="card-title">
+                                <i class="far fa-id-badge"></i> Ajout Rapide
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                ajoute ces BG
+                            </h6>
                             {% for profile in ajout %}
                                 <div class="card gedf-card" style="margin-top:10px">
                                     <div class="card-body">
                                         {% if profile.photo %}
-                                            <img width="25%" height="25%" class="rounded-circle"
-                                                 src="{{ profile.photo.url }}" alt="">
+                                            <img width="25%"
+                                                 height="25%"
+                                                 class="rounded-circle"
+                                                 src="{{ profile.photo.url }}"
+                                                 alt="">
                                         {% endif %}
-                                        <p class="card-text h5">@{{ profile.user.username }}</p>
-                                        <div class="h7 text-muted">{{ profile.user.first_name }} {{ profile.user.last_name }}</div>
+                                        <p class="card-text h5">
+                                            @{{ profile.user.username }}
+                                        </p>
+                                        <div class="h7 text-muted">
+                                            {{ profile.user.first_name }} {{ profile.user.last_name }}
+                                        </div>
                                         {% if profile.description %}
-                                            <div class="h7">{{ profile.description }}</div>
+                                            <div class="h7">
+                                                {{ profile.description }}
+                                            </div>
                                         {% endif %}
-                                        <form action="{% url 'ajout_rapide' %}" method="post"
+                                        <form action="{% url 'ajout_rapide' %}"
+                                              method="post"
                                               id="ajout_rapide{{ profile.id }}">
                                             {% csrf_token %}
                                             <input type="hidden" name="user_id" value="{{ profile.user.id }}">
@@ -437,7 +452,6 @@
                                                 <i class="fas fa-user-plus"></i> Ajouter
                                             </a>
                                         </form>
-
                                     </div>
                                 </div>
                             {% endfor %}
@@ -447,9 +461,8 @@
             </div>
         </div>
     </div>
-
-    <script src="https://kit.fontawesome.com/eab4ac3966.js" crossorigin="anonymous"></script>
-
+    <script src="https://kit.fontawesome.com/eab4ac3966.js"
+            crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -460,15 +473,14 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function (event) {
+        document.addEventListener("DOMContentLoaded", function(event) {
             var scrollpos = localStorage.getItem('scrollpos');
             if (scrollpos) window.scrollTo(0, scrollpos);
         });
 
-        window.onbeforeunload = function (e) {
+        window.onbeforeunload = function(e) {
             localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
-
-    </div>
+</div>
 {% endblock content %}
