@@ -170,3 +170,12 @@ Nous avons choisi les tests intégrés à Django pour tester notre application. 
 Nous avons choisi la licence MIT car elle est très permissive et nous permet de garder la propriété de notre code.
 
 ## 🙃 Perspectives
+
+Nous avons plusieurs idées d'améliorations pour le projet :
+
+- Feed avec que les amis/ la famille
+- Avoir des stories
+- Conversations privées
+- Conversation de famille
+- Arbre généalogique de la famille
+- Badges sur les assos et listes
