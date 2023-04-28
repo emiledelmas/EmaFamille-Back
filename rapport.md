@@ -179,3 +179,5 @@ Nous avons plusieurs idées d'améliorations pour le projet :
 - Conversation de famille
 - Arbre généalogique de la famille
 - Badges sur les assos et listes
+
+Cette liste est non-exhaustive !
