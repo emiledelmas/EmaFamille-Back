@@ -24,7 +24,12 @@
 ## Organisation globale du projet
 
 ## Description fonctionnelle du résultat obtenu
+### Technologies utilisées
+- Front : HTML, CSS, JavaScript, Bootstrap 5
+- Back : Python, Django
+- Serveur : Nginx, Gunicorn, Docker
 
+### Explication de Django
 ## Description de l’architecture technique et applicative du projet avec justification des choix effectués
 
 ## Notice d’installation
