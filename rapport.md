@@ -7,6 +7,7 @@
 - Emile Delmas [@emiledelmas](https://www.github.com/emiledelmas)
 - Simon Chalmé [@simonchalme](https://www.github.com/simonchalme)
 - Laura Bertieaux [@NapsyGit](https://www.github.com/napsygit)
+- TEST CAR BIZARRE: [@laurabertieaux](https://www.github.com/laurabertieaux)
 - Ludovic Terrasson [@Ludooooooooo](https://www.github.com/Ludooooooooo)
 - Arthur Rubio [@Hermes075](https://www.github.com/Hermes075)
 - Charlotte Houzé [@cha0601](https://www.github.com/cha0601)
