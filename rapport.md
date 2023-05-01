@@ -22,11 +22,6 @@
 ## 🤔 Expression du besoin
 
 ## 🦾 Organisation globale du projet
-test :) 
-### sous titre ?
-#### 4
-##### 5
-###### 6
 
 ### ✨ Front
 Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utiliser la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
@@ -57,17 +52,29 @@ Grace a la création de la base de données nous avons pu rendre fonctionnel la 
 Ensuite l'affichage doit s'adapter au compte connecté. Il a fallut modifier certaines pages pour qu'elles affichent les informations propre au compte connecté.
 
 #### Les posts sur le feed
+Lorsque les profils était oppérationnels, nous avons developper la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistrer dans la base de données avec sa date de publication, son auteur, 
 
+                            **_vérifier s'il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
+Après queques test, nous avons ajouté la possibilité de supprimer les posts en tant qu'auteur, d'aimer et de commenter.
+                            
 #### Possibilité d'avoir des amis
 Une fois les comptes crées il était possible de connecté les comptes avec le système d'amis. Certaines fonctionnalités ont été ajoutés comme l'affichage du nombre d'ami, ou le tri des post pour afficher seulement ceux des amis.
 
-#### PAPL
-Création des groupe de famille,
-Page de famille
+#### Les familles 
+Le but de ce site était de permettre aux gens de trouver une "Famille" à l'EMA. Une fois que le site était globalement fonctionnel, nous avons ajouter la possibilité de faire parti d'une famille. Pour cela une page entierement dédiée a la à été ajoutée. Et pour les personnes n'en ayant pas, ils peuvent soit demander à être ajouté dans une famille, soit en créer une. Et c'est grace aux posts du forum que les gens peuvent être mis au courant des activités organisées par les familles pour les rencontrer.
 
+Les familles sont enregistrées dans la base de données avec les informations suivantes:
+- nom
+- chef
+- logo
+- description
+- membres
+
+Les familles ont accès à un forum reservé, une galerie photo privée et la gestion des noveaux memebre est gérée par le chef de famille.
+Dans cette phase de la conception du projet, c'est donc un ensemble de fonctionnalitées qui ont été ajoutées aux éléments existants.
 
 ### 🌎 Lancement du projet en ligne
-
+La dernière étape à été de mettre une version de notre site sur internet pour permettre à des étudiants de l'école de la tester.
 
 
 ## ⚙️ Description fonctionnelle du résultat obtenu
