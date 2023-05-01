@@ -28,6 +28,48 @@ test :)
 ##### 5
 ###### 6
 
+### ✨ Front
+Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utiliser la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
+
+### 🗂️ Base de donnée
+Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de donnée. 
+
+Les informations stockées pour les utilisateurs sont: 
+- identifiant
+- nom
+- prénom
+- promotion
+- photo de profil
+- description
+
+                            **_vérifier si il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
+
+### 👨‍💻 Back 
+Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons télécharger tout le travail éffectuer précédemment sur IntelliJ.
+
+#### Liens entre les pages
+Les pages étaient crées et ordnnées cependant aucune connexion entre-elles existait, nous avons donc commencer par rendre tout les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composants le site.
+
+#### Controle pour accès au site
+Grace a la création de la base de données nous avons pu rendre fonctionnel la page de connexion. Ainsi pour avoir accès au site il faut un identifiant enregistré dans la base de données et le mot de passe correspondant.
+
+#### Création des profils
+Ensuite l'affichage doit s'adapter au compte connecté. Il a fallut modifier certaines pages pour qu'elles affichent les informations propre au compte connecté.
+
+#### Les posts sur le feed
+
+#### Possibilité d'avoir des amis
+Une fois les comptes crées il était possible de connecté les comptes avec le système d'amis. Certaines fonctionnalités ont été ajoutés comme l'affichage du nombre d'ami, ou le tri des post pour afficher seulement ceux des amis.
+
+#### PAPL
+Création des groupe de famille,
+Page de famille
+
+
+### 🌎 Lancement du projet en ligne
+
+
+
 ## ⚙️ Description fonctionnelle du résultat obtenu
 
 ### Technologies utilisées
