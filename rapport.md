@@ -20,6 +20,8 @@
 - [Github Repos Front](https://github.com/emiledelmas/EmaFamilleFront)
 
 ## 🤔 Expression du besoin
+Nous souhaitons rendre la communication entre les emayens plus simple et spontanée.
+Nous souhaitons aussi mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs.
 
 ## 🦾 Organisation globale du projet
 
