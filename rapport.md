@@ -1,4 +1,4 @@
-# 👪 EmaFamille
+# 👪 EMA Famille
 
 ![Logo](https://emafamille.fr/static/Logo_EMAFamille.PNG)
 
@@ -20,16 +20,18 @@
 - [Github Repos Front](https://github.com/emiledelmas/EmaFamilleFront)
 
 ## 🤔 Expression du besoin
-Nous souhaitons rendre la communication entre les emayens plus simple et spontanée.
-Nous souhaitons aussi mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs.
+Nous souhaitons rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école
+
+Prenons pour exemple un élève s'appelant Pierre.
+Pierre vient d'intégrer l'école des Mines et ne connaît pas encore l'organisation des différents élèves en son sein. Suite à une recommandation d'un ami, Pierre décide de s'inscrire sur EMA Famille et découvre les différentes familles de l'école. Pierre peut donc d'hors et déjà grâce aux différents tags présents sur le profil de la famille estimer si l'ambiance de la famille va lui plaire.
 
 ## 🦾 Organisation globale du projet
 
 ### ✨ Front
-Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utiliser la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
+Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utilisé la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
 
 ### 🗂️ Base de donnée
-Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de donnée. 
+Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de données. 
 
 Les informations stockées pour les utilisateurs sont: 
 - identifiant
@@ -38,32 +40,33 @@ Les informations stockées pour les utilisateurs sont:
 - promotion
 - photo de profil
 - description
+- adresse mail
 
                             **_vérifier si il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
 
 ### 👨‍💻 Back 
-Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons télécharger tout le travail éffectuer précédemment sur IntelliJ.
+Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons téléchargé tout le travail éffectué précédemment sur IntelliJ.
 
 #### Liens entre les pages
-Les pages étaient crées et ordnnées cependant aucune connexion entre-elles existait, nous avons donc commencer par rendre tout les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composants le site.
+Les pages étaient créées et ordonnées cependant aucune connexion entre-elles existait, nous avons donc commencé par rendre tout les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composant le site.
 
 #### Controle pour accès au site
-Grace a la création de la base de données nous avons pu rendre fonctionnel la page de connexion. Ainsi pour avoir accès au site il faut un identifiant enregistré dans la base de données et le mot de passe correspondant.
+Grâce a la création de la base de données nous avons pu rendre fonctionnelle la page de connexion. Ainsi pour avoir accès au site il faut un identifiant enregistré dans la base de données et le mot de passe correspondant.
 
 #### Création des profils
 Ensuite l'affichage doit s'adapter au compte connecté. Il a fallut modifier certaines pages pour qu'elles affichent les informations propre au compte connecté.
 
 #### Les posts sur le feed
-Lorsque les profils était oppérationnels, nous avons developper la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistrer dans la base de données avec sa date de publication, son auteur, 
+Lorsque les profils étaient oppérationnels, nous avons codé la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistré dans la base de données avec sa date de publication, son auteur (identifiant) 
 
                             **_vérifier s'il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
-Après queques test, nous avons ajouté la possibilité de supprimer les posts en tant qu'auteur, d'aimer et de commenter.
+Après quelques test, nous avons ajouté la possibilité de supprimer les posts en tant qu'auteur, d'aimer et de commenter.
                             
 #### Possibilité d'avoir des amis
-Une fois les comptes crées il était possible de connecté les comptes avec le système d'amis. Certaines fonctionnalités ont été ajoutés comme l'affichage du nombre d'ami, ou le tri des post pour afficher seulement ceux des amis.
+Une fois les comptes créés il était possible de connecté les comptes avec le système d'amis. Certaines fonctionnalités ont été ajoutés comme l'affichage du nombre d'ami, ou le tri des post pour afficher seulement ceux des amis.
 
 #### Les familles 
-Le but de ce site était de permettre aux gens de trouver une "Famille" à l'EMA. Une fois que le site était globalement fonctionnel, nous avons ajouter la possibilité de faire parti d'une famille. Pour cela une page entierement dédiée a la à été ajoutée. Et pour les personnes n'en ayant pas, ils peuvent soit demander à être ajouté dans une famille, soit en créer une. Et c'est grace aux posts du forum que les gens peuvent être mis au courant des activités organisées par les familles pour les rencontrer.
+Le but de ce site était de permettre aux gens de trouver une "Famille" à l'EMA. Une fois que le site était globalement fonctionnel, nous avons ajouter la possibilité de faire parti d'une famille. Pour cela une page entierement dédiée a la à été ajoutée. Et pour les personnes n'en ayant pas, ils peuvent soit demander à être ajoutés dans une famille, soit en créer une. Et c'est grace aux posts du forum que les gens peuvent être mis au courant des activités organisées par les familles pour les rencontrer.
 
 Les familles sont enregistrées dans la base de données avec les informations suivantes:
 - nom
@@ -72,8 +75,8 @@ Les familles sont enregistrées dans la base de données avec les informations s
 - description
 - membres
 
-Les familles ont accès à un forum reservé, une galerie photo privée et la gestion des noveaux memebre est gérée par le chef de famille.
-Dans cette phase de la conception du projet, c'est donc un ensemble de fonctionnalitées qui ont été ajoutées aux éléments existants.
+Les familles ont accès à un forum reservé, une galerie photo privée et la gestion des noveaux membre est gérée par le chef de famille (créateur de la famille sur le site).
+Dans cette phase de la conception du projet, c'est donc un ensemble de fonctionnalités qui ont été ajoutées aux éléments existants.
 
 ### 🌎 Lancement du projet en ligne
 La dernière étape à été de mettre une version de notre site sur internet pour permettre à des étudiants de l'école de la tester.
@@ -126,7 +129,7 @@ Schéma de l'architecture de déploiement :
 
 ### Recommandé :
 
-Nous vous conseillons d'utiliser la version de production de EmaFamille afin de la tester. Pour cela, rendez-vous sur [EmaFamille.fr](https://emafamille.fr).
+Nous vous conseillons d'utiliser la version de production de EmaFamille afin de la tester. Pour cela, rendez-vous sur [EmaFamille.fr](https://emafamille.fr)!
 
 ### Installation en local (mode de développement) :
 
