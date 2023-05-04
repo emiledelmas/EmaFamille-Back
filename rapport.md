@@ -10,7 +10,7 @@
 - Ludovic Terrasson [@Ludooooooooo](https://www.github.com/Ludooooooooo)
 - Arthur Rubio [@Hermes075](https://www.github.com/Hermes075)
 - Charlotte Houzé [@cha0601](https://www.github.com/cha0601)
-- Ilyane Gomis [@IlyaneGomis](https://www.github.com/IlyaneGomis)
+- Ilyane Gomis [@Ilyanee](https://www.github.com/Ilyanee)
 - Florian Laporte
 
 ## 🔗 Liens vers le projet et les dépôts GitHub
@@ -20,27 +20,27 @@
 - [Github Repos Front](https://github.com/emiledelmas/EmaFamilleFront)
 
 ## 🤔 Expression du besoin
-Nous souhaitons rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école
+Notre objectif est de rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école
 
 Prenons pour exemple un élève s'appelant Pierre.
-Pierre vient d'intégrer l'école des Mines et ne connaît pas encore l'organisation des différents élèves en son sein. Suite à une recommandation d'un ami, Pierre décide de s'inscrire sur EMA Famille et découvre les différentes familles de l'école. Pierre peut donc d'hors et déjà grâce aux différents tags présents sur le profil de la famille estimer si l'ambiance de la famille va lui plaire.
+Pierre vient d'intégrer l'école des Mines et ne connaît pas encore l'organisation des différents élèves en son sein. Suite à une recommandation d'un ami, Pierre décide de s'inscrire sur EMA Famille et découvre les différentes familles de l'école. Pierre peut donc d´ores et déjà, grâce aux différents tags présents sur le profil de la famille, estimer si l'ambiance de la famille va lui plaire.
 
 ## 🦾 Organisation globale du projet
 
 ### ✨ Front
 Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utilisé la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
 
-### 🗂️ Base de donnée
+### 🗂️ Base de données
 Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de données. 
 
 Les informations stockées pour les utilisateurs sont: 
-- identifiant
-- nom
-- prénom
-- promotion
-- photo de profil
-- description
-- adresse mail
+- identifiant (obligatoire)
+- nom (obligatoire)
+- prénom (obligatoire)
+- promotion (obligatoire)
+- photo de profil (optionnel)
+- description (optionnel)
+- adresse mail (obligatoire)
 
                             **_vérifier si il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
 
@@ -48,7 +48,7 @@ Les informations stockées pour les utilisateurs sont:
 Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons téléchargé tout le travail éffectué précédemment sur IntelliJ.
 
 #### Liens entre les pages
-Les pages étaient créées et ordonnées cependant aucune connexion entre-elles existait, nous avons donc commencé par rendre tout les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composant le site.
+Les pages étaient créées et ordonnées cependant aucune connexion entre elles n´existait; nous avons donc commencé par rendre tous les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composant le site.
 
 #### Controle pour accès au site
 Grâce a la création de la base de données nous avons pu rendre fonctionnelle la page de connexion. Ainsi pour avoir accès au site il faut un identifiant enregistré dans la base de données et le mot de passe correspondant.
