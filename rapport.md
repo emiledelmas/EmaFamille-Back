@@ -2,6 +2,8 @@
 
 ![Logo](https://emafamille.fr/static/Logo_EMAFamille.PNG)
 
+Version PDF disponible avec : [md2pdf](https://md2pdf.netlify.app/)
+
 ## 🚀 Membres de l'équipe
 
 - Emile Delmas [@emiledelmas](https://www.github.com/emiledelmas)
@@ -20,6 +22,7 @@
 - [Github Repos Front](https://github.com/emiledelmas/EmaFamilleFront)
 
 ## 🤔 Expression du besoin
+
 Notre objectif est de rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école
 
 Prenons pour exemple un élève s'appelant Pierre.
@@ -28,12 +31,15 @@ Pierre vient d'intégrer l'école des Mines et ne connaît pas encore l'organisa
 ## 🦾 Organisation globale du projet
 
 ### ✨ Front
-Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utilisé la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.  
+
+Pour se familiariser avec tout les languages nécéssaires pour notre projet, nous avons fait le choix de commencer par développer le front pour avoir une première approche avec le language HTML et CSS. Nous avons ensuite utilisé la librairie bootstraps et les snippets, une fois que le language était assimilé par chacun, pour avoir le temps de s'occuper du back par la suite.
 
 ### 🗂️ Base de données
-Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de données. 
 
-Les informations stockées pour les utilisateurs sont: 
+Il nous fallait ensuite un moyen d'enregistrer les comptes des utilisateurs et leurs informations. Pour cela nous avons eu recours à une base de données.
+
+Les informations stockées pour les utilisateurs sont:
+
 - identifiant (obligatoire)
 - nom (obligatoire)
 - prénom (obligatoire)
@@ -44,31 +50,40 @@ Les informations stockées pour les utilisateurs sont:
 
                             **_vérifier si il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
 
-### 👨‍💻 Back 
+### 👨‍💻 Back
+
 Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons téléchargé tout le travail éffectué précédemment sur IntelliJ.
 
 #### Liens entre les pages
+
 Les pages étaient créées et ordonnées cependant aucune connexion entre elles n´existait; nous avons donc commencé par rendre tous les boutons fonctionnels afin de pouvoir naviguer sur l'ensemble des pages composant le site.
 
 #### Controle pour accès au site
+
 Grâce a la création de la base de données nous avons pu rendre fonctionnelle la page de connexion. Ainsi pour avoir accès au site il faut un identifiant enregistré dans la base de données et le mot de passe correspondant.
 
 #### Création des profils
+
 Ensuite l'affichage doit s'adapter au compte connecté. Il a fallut modifier certaines pages pour qu'elles affichent les informations propre au compte connecté.
 
 #### Les posts sur le feed
-Lorsque les profils étaient oppérationnels, nous avons codé la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistré dans la base de données avec sa date de publication, son auteur (identifiant) 
+
+Lorsque les profils étaient oppérationnels, nous avons codé la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistré dans la base de données avec sa date de publication, son auteur (identifiant)
 
                             **_vérifier s'il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
+
 Après quelques test, nous avons ajouté la possibilité de supprimer les posts en tant qu'auteur, d'aimer et de commenter.
-                            
+
 #### Possibilité d'avoir des amis
+
 Une fois les comptes créés il était possible de connecté les comptes avec le système d'amis. Certaines fonctionnalités ont été ajoutés comme l'affichage du nombre d'ami, ou le tri des post pour afficher seulement ceux des amis.
 
-#### Les familles 
+#### Les familles
+
 Le but de ce site était de permettre aux gens de trouver une "Famille" à l'EMA. Une fois que le site était globalement fonctionnel, nous avons ajouter la possibilité de faire parti d'une famille. Pour cela une page entierement dédiée a la à été ajoutée. Et pour les personnes n'en ayant pas, ils peuvent soit demander à être ajoutés dans une famille, soit en créer une. Et c'est grace aux posts du forum que les gens peuvent être mis au courant des activités organisées par les familles pour les rencontrer.
 
 Les familles sont enregistrées dans la base de données avec les informations suivantes:
+
 - nom
 - chef
 - logo
@@ -79,8 +94,8 @@ Les familles ont accès à un forum reservé, une galerie photo privée et la ge
 Dans cette phase de la conception du projet, c'est donc un ensemble de fonctionnalités qui ont été ajoutées aux éléments existants.
 
 ### 🌎 Lancement du projet en ligne
-La dernière étape à été de mettre une version de notre site sur internet pour permettre à des étudiants de l'école de la tester.
 
+La dernière étape à été de mettre une version de notre site sur internet pour permettre à des étudiants de l'école de la tester.
 
 ## ⚙️ Description fonctionnelle du résultat obtenu
 
@@ -109,7 +124,7 @@ Le back est développé en Python avec le framework Django. Nous avons choisi Dj
 
 ### 🔒 Base de données
 
-Nous avons choisi SQLite comme base de données car elle est très simple à mettre en place et suffisante pour notre projet. Elle est également très bien intégrée à Django.
+Nous avons choisi SQLite comme base de données car elle est très simple à mettre en place et suffisante pour notre projet. Elle est également très bien intégrée à Django. Pour une utilisation plus avancé avec plus d'utilisateurs, nous aurions pu utilisé PostgreSQL qui est plus adapté à une utilisation en production.
 
 ### 🖥️ Serveur et déploiement
 
@@ -129,7 +144,7 @@ Schéma de l'architecture de déploiement :
 
 ### Recommandé :
 
-Nous vous conseillons d'utiliser la version de production de EmaFamille afin de la tester. Pour cela, rendez-vous sur [EmaFamille.fr](https://emafamille.fr)!
+Nous vous conseillons d'utiliser la version de production de EmaFamille afin de la tester. Pour cela, rendez-vous sur [EmaFamille.fr](https://emafamille.fr) !
 
 ### Installation en local (mode de développement) :
 
@@ -222,16 +237,48 @@ Les familles possèdent également un album photo, vous pouvez y ajouter des pho
 
 Nous avons choisi les tests intégrés à Django pour tester notre application. Nous avons testé la fonction login afin de voir les codes d'erreurs retournés.
 
+```python
+class TestViews(TestCase):
+
+    def test_login_GET(self):
+        response = self.client.get('/login/')
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'PageConnexion.html')
+
+    def test_login_POST(self):
+        response = self.client.post('/login/', {
+            'username': 'testuser',
+            'password': 'testpassword'
+        })
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'PageConnexion.html')
+```
+
 ## 🔓 Licence
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 Nous avons choisi la licence MIT car elle est très permissive et nous permet de garder la propriété de notre code.
+Cette licence autorise :
+
+- l'utilisation à des fins commerciales
+- la modification
+- la distribution
+- l'utilisation privée
+
+La condition est de citer les auteurs du code.
+
+Les limitations de cette licence sont :
+
+- aucune responsabilité des auteurs
+- aucune garantie du logiciel
 
 ## 🙃 Perspectives
 
 Nous avons plusieurs idées d'améliorations pour le projet :
 
+- Ajout d'une mention légale (obligatoire)
 - Feed avec que les amis/ la famille
 - Avoir des stories
 - Conversations privées
@@ -239,4 +286,6 @@ Nous avons plusieurs idées d'améliorations pour le projet :
 - Arbre généalogique de la famille
 - Badges sur les assos et listes
 
-Cette liste est non-exhaustive !
+Cette liste est non-exhaustive et nous avons d'autres idées en tête.
+
+D'autres aspects comme le coût financier ou la sécurité doivent être envisagés avant de les mettre en place.
