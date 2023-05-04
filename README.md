@@ -72,5 +72,5 @@
 - Ludovic Terrasson [@Ludooooooooo](https://www.github.com/Ludooooooooo)
 - Arthur Rubio [@Hermes075](https://www.github.com/Hermes075)
 - Charlotte Houzé [@cha0601](https://www.github.com/cha0601)
-- Ilyane Gomis [@IlyaneGomis](https://www.github.com/IlyaneGomis)
+- Ilyane Gomis [@Ilyanee](https://www.github.com/Ilyanee)
 - Florian Laporte
