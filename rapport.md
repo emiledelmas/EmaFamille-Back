@@ -2,6 +2,7 @@
 
 ![Logo](https://emafamille.fr/static/Logo_EMAFamille.PNG)
 
+Lien du fichier markdown (plus lisible) : [rapport.md](https://github.com/emiledelmas/EmaFamille-Back/blob/master/rapport.md)
 Version PDF disponible avec : [md2pdf](https://md2pdf.netlify.app/)
 
 ## 🚀 Membres de l'équipe
