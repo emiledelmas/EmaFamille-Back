@@ -50,8 +50,6 @@ Les informations stockées pour les utilisateurs sont:
 - description (optionnel)
 - adresse mail (obligatoire)
 
-                            **_vérifier si il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
-
 ### 👨‍💻 Back
 
 Il nous fallait ensuite rendre le site fonctionnel, nous sommes ainsi passé sur PyCharm, où nous avons téléchargé tout le travail éffectué précédemment sur IntelliJ.
@@ -72,7 +70,7 @@ Ensuite l'affichage doit s'adapter au compte connecté. Il a fallut modifier cer
 
 Lorsque les profils étaient oppérationnels, nous avons codé la possibilité de poster des messages et des images visibles par tous. Chaque post est enregistré dans la base de données avec sa date de publication, son auteur (identifiant)
 
-                            **_vérifier s'il manque pas des trucs  + dire ce qui est obligatoire/optionnel_**
+                           
 
 Après quelques test, nous avons ajouté la possibilité de supprimer les posts en tant qu'auteur, d'aimer et de commenter.
 
