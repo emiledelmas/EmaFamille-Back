@@ -25,7 +25,7 @@ Version PDF disponible avec : [md2pdf](https://md2pdf.netlify.app/)
 
 ## 🤔 Expression du besoin
 
-Notre objectif est de rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école
+Notre objectif est de rendre la communication entre les emayens plus simple et spontanée, et mettre en avant les différentes familles présentes à l'EMA (groupes d'étudiants de différentes promotions s'entendant bien) et leur offrir une plateforme privilégiée pour partager des souvenirs. Nous voulons aussi rendre ces familles plus accessibles aux nouveaux élèves, pour qu'ils puissent s'intégrer plus facilement au sein de l'école. Cette objectif est né d'un constat de cette année, le lien entre les 1A et les éleves des autres années présent dans les familles ne s'est pas fait pour tous et c'est donc pour cela que nous avons pensé qu'une plateforme permettant cela pouvait être quelque chose apportant une réelle valeur ajouté.
 
 Prenons pour exemple un élève s'appelant Pierre.
 Pierre vient d'intégrer l'école des Mines et ne connaît pas encore l'organisation des différents élèves en son sein. Suite à une recommandation d'un ami, Pierre décide de s'inscrire sur EMA Famille et découvre les différentes familles de l'école. Pierre peut donc d´ores et déjà, grâce aux différents tags présents sur le profil de la famille, estimer si l'ambiance de la famille va lui plaire.
